@@ -3,7 +3,9 @@
   "version": "1.2.0",
   "main": "assets/js/ace.min.js",
   "ignore": [
-    "*.*",
+    "*.html",
+    "*.txt",
+    "changelog",
     "docs",
     "examples",
     "mustache"
