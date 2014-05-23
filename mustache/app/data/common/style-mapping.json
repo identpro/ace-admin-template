@@ -1,23 +1,25 @@
 {
- "timepicker" : "bootstrap-timepicker.css",
-
  "chosen" : "chosen.css",
  
  "colorbox" : "colorbox.css",
 
  "colorpicker" : "colorpicker.css",
 
+ "timepicker" : "bootstrap-timepicker.css",
+
  "datepicker" : "datepicker.css",
 
  "daterangepicker" : "daterangepicker.css",
+ 
+ "datetimepicker" : "bootstrap-datetimepicker.css",
 
  "fullcalendar" : "fullcalendar.css",
 
  "gritter" : "jquery.gritter.css",
 
- "jquery-ui" : "jquery-ui-1.10.3.custom.min.css",
+ "jquery-ui" : "jquery-ui.custom.min.css",
  
- "jquery-ui-full" : "jquery-ui-1.10.3.full.min.css",
+ "jquery-ui-full" : "jquery-ui.min.css",
  
  "jqgrid" : "ui.jqgrid.css",
 

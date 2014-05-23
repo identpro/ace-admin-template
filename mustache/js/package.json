@@ -7,7 +7,6 @@
 		"htmlparser2": "3.0.5",
 		"mustache": "0.7.2",
 		"require-csv": "0.0.1",
-		"xtend": "2.0.3",
-		"yuicompressor": "2.4.8"
+		"xtend": "2.0.3"
 	}
 }

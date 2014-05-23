@@ -3,9 +3,12 @@
 
  "colorpicker" : "bootstrap-colorpicker.min.js",
 
+ "moment" : "date-time/moment.min.js",
  "datepicker"  : "date-time/bootstrap-datepicker.min.js",
 
  "timepicker" : "date-time/bootstrap-timepicker.min.js",
+ 
+ "datetimepicker" : "date-time/bootstrap-datetimepicker.min.js",
 
  "daterangepicker" : ["date-time/moment.min.js" , "date-time/daterangepicker.min.js"],
 
@@ -17,7 +20,7 @@
 
  "wizard" : "fuelux/fuelux.wizard.min.js",
 
- "tree" : ["fuelux/data/fuelux.tree-sampledata.js" , "fuelux/fuelux.tree.min.js"],
+ "tree" : ["fuelux/data/fuelux.tree-sample-demo-data.js" , "fuelux/fuelux.tree.min.js"],
 
  "fullcalendar" : "fullcalendar.min.js",
 
@@ -27,7 +30,7 @@
 
  "dataTables" : ["jquery.dataTables.min.js" , "jquery.dataTables.bootstrap.js"],
 
- "easy-pie-chart" : "jquery.easy-pie-chart.min.js",
+ "easy-pie-chart" : "jquery.easypiechart.min.js",
 
  "flot" : "flot/jquery.flot.min.js",
 
@@ -49,9 +52,9 @@
 
  "validate" : ["jquery.validate.min.js" , "additional-methods.min.js"],
 
- "jquery-ui" : ["jquery-ui-1.10.3.custom.min.js" , "jquery.ui.touch-punch.min.js"],
+ "jquery-ui" : ["jquery-ui.custom.min.js" , "jquery.ui.touch-punch.min.js"],
  
- "jquery-ui-full" : ["jquery-ui-1.10.3.full.min.js" , "jquery.ui.touch-punch.min.js"],
+ "jquery-ui-full" : ["jquery-ui.min.js" , "jquery.ui.touch-punch.min.js"],
 
  "jqgrid" : ["jqGrid/jquery.jqGrid.min.js" , "jqGrid/i18n/grid.locale-en.js"],
 

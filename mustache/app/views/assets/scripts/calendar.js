@@ -36,9 +36,10 @@ jQuery(function($) {
 
 	
 	var calendar = $('#calendar').fullCalendar({
+		//isRTL: true,
 		 buttonText: {
-			prev: '<i class="icon-chevron-left"></i>',
-			next: '<i class="icon-chevron-right"></i>'
+			prev: '<i class="ace-icon fa fa-chevron-left"></i>',
+			next: '<i class="ace-icon fa fa-chevron-right"></i>'
 		},
 	
 		header: {
@@ -47,22 +48,23 @@ jQuery(function($) {
 			right: 'month,agendaWeek,agendaDay'
 		},
 		events: [
-		{
+		  {
 			title: 'All Day Event',
 			start: new Date(y, m, 1),
 			className: 'label-important'
-		},
-		{
+		  },
+		  {
 			title: 'Long Event',
 			start: new Date(y, m, d-5),
 			end: new Date(y, m, d-2),
 			className: 'label-success'
-		},
-		{
+		  },
+		  {
 			title: 'Some Event',
 			start: new Date(y, m, d-3, 16, 0),
 			allDay: false
-		}]
+		  }
+		]
 		,
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -113,44 +115,52 @@ jQuery(function($) {
 			
 
 			calendar.fullCalendar('unselect');
-			
 		}
 		,
 		eventClick: function(calEvent, jsEvent, view) {
 
-			var form = $("<form class='form-inline'><label>Change event name &nbsp;</label></form>");
-			form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
-			form.append("<button type='submit' class='btn btn-sm btn-success'><i class='icon-ok'></i> Save</button>");
-			
-			var div = bootbox.dialog({
-				message: form,
-			
-				buttons: {
-					"delete" : {
-						"label" : "<i class='icon-trash'></i> Delete Event",
-						"className" : "btn-sm btn-danger",
-						"callback": function() {
-							calendar.fullCalendar('removeEvents' , function(ev){
-								return (ev._id == calEvent._id);
-							})
-						}
-					} ,
-					"close" : {
-						"label" : "<i class='icon-remove'></i> Close",
-						"className" : "btn-sm"
-					} 
-				}
-
-			});
-			
-			form.on('submit', function(){
-				calEvent.title = form.find("input[type=text]").val();
-				calendar.fullCalendar('updateEvent', calEvent);
-				div.modal("hide");
-				return false;
-			});
-			
+			//display a modal
+			var modal = 
+			'<div class="modal fade">\
+			  <div class="modal-dialog">\
+			   <div class="modal-content">\
+				 <div class="modal-body">\
+				   <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
+				   <form class="no-margin">\
+					  <label>Change event name &nbsp;</label>\
+					  <input class="middle" autocomplete="off" type="text" value="' + calEvent.title + '" />\
+					 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Save</button>\
+				   </form>\
+				 </div>\
+				 <div class="modal-footer">\
+					<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> Delete Event</button>\
+					<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+				 </div>\
+			  </div>\
+			 </div>\
+			</div>';
 		
+		
+			var modal = $(modal).appendTo('body');
+			modal.find('form').on('submit', function(ev){
+				ev.preventDefault();
+
+				calEvent.title = $(this).find("input[type=text]").val();
+				calendar.fullCalendar('updateEvent', calEvent);
+				modal.modal("hide");
+			});
+			modal.find('button[data-action=delete]').on('click', function() {
+				calendar.fullCalendar('removeEvents' , function(ev){
+					return (ev._id == calEvent._id);
+				})
+				modal.modal("hide");
+			});
+			
+			modal.modal('show').on('hidden', function(){
+				modal.remove();
+			});
+
+
 			//console.log(calEvent.id);
 			//console.log(jsEvent);
 			//console.log(view);

@@ -3,9 +3,9 @@
  ,
  "description" : "3 styles with inline editable feature"
  ,
- "styles" : ["jquery-ui" , "gritter", "select2", "x-editable"]
+ "styles" : ["jquery-ui" , "gritter", "select2", "datepicker", "x-editable"]
  ,
- "scripts" : ["jquery-ui" , "gritter" , "bootbox" , "slimscroll" , "easy-pie-chart" , "wysiwyg", "select2" , "datepicker", "spinner", "x-editable", "maskedinput"]
+ "scripts" : ["jquery-ui" , "gritter" , "bootbox" , "easy-pie-chart" , "datepicker", "wysiwyg", "select2" , "spinner", "x-editable", "maskedinput"]
  ,
  "ie_scripts" : [{"version":8, "name":"excanvas"}]
 }

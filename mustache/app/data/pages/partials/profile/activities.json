@@ -15,13 +15,13 @@
 	} ,
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-ok btn-success",
+	"icon" : "fa fa-check btn-success",
 	"action" : "joined <a href='#'>Country Music</a> group.",
 	"time" : "5 hours ago"
 	} ,
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-picture btn-info",
+	"icon" : "fa fa-picture-o btn-info",
 	"action" : "uploaded a new photo. <a href='#'>Take a look</a>",
 	"time" : "5 hours ago"
 	} ,
@@ -37,7 +37,7 @@
  [
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-edit btn-pink",
+	"icon" : "fa fa-pencil-square-o btn-pink",
 	"action" : "published a new blog post. <a href='#'>Read now</a>",
 	"time" : "11 hours ago"
 	} ,
@@ -49,19 +49,19 @@
 	} ,
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-key btn-info",
+	"icon" : "fa fa-key btn-info",
 	"action" : "logged in.",
 	"time" : "12 hours ago"
 	} ,
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-off btn-inverse",
+	"icon" : "fa fa-power-off btn-inverse",
 	"action" : "logged out.",
 	"time" : "16 hours ago"
 	} ,
 	{
 	"name" : "Alex Doe",
-	"icon" : "icon-key btn-info",
+	"icon" : "fa fa-key btn-info",
 	"action" : "logged in.",
 	"time" : "16 hours ago"
 	} 

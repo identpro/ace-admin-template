@@ -6,8 +6,10 @@
 */
 
 var htmlparser = require("htmlparser2")
+var keep_help = false;
 
-module.exports = function(html_input , callback) {
+module.exports = function(html_input , keep_help_comments, callback) {
+	keep_help = keep_help_comments || false;
 	var handler = new htmlparser.DomHandler(function (error, dom) {
 		if (error) { }
 		else {
@@ -76,7 +78,7 @@ function pretty_print(dom , level) {
 
 		if("attribs" in e) {
 			for(var name in e.attribs) if(e.attribs.hasOwnProperty(name)) {
-				output += " "+name+'="'+(e.attribs[name])+'"';
+				output += " "+name+'="'+(trim(e.attribs[name]).replace(/\s/g, ' '))+'"';
 			}
 		}
 
@@ -135,7 +137,9 @@ function pretty_print(dom , level) {
 						}
 					}
 					else {
-						output += "<!-- "+trim(e.children[0].data)+" -->";
+						if( keep_help || e.children[0].data.indexOf('section:') == -1 ) {
+						    output += "<!-- "+trim(e.children[0].data)+" -->";
+						}
 					}
 				}
 				else {
@@ -155,6 +159,11 @@ function pretty_print(dom , level) {
 			}
 			else {
 				if( i < dom.length - 1 && (dom[i+1].type == 'comment') );//don't add new line if adjacent next is a comment, we add new line after comment
+				else if( i < dom.length - 1 && dom[i+1].type == 'text' && dom[i+1].data.match(/^\S/))
+				{
+					//console.log("here");
+				}
+				
 				else if( i < dom.length - 2 && dom[i+1].type == 'text' && dom[i+2].type == 'tag'
 					&& (!dom[i+2].children || (dom[i+2].children.length == 1 && dom[i+2].children[0].type == 'text')) )
 				{
@@ -170,12 +179,23 @@ function pretty_print(dom , level) {
 	else if(e.type == 'text' || e.type == 'comment') {
 		var text = trim(e.data);
 		if(text.length > 0) {
-			if(e.type == 'comment' && i > 0 && dom[i-1].type == 'tag') output += "<!-- "+text+" -->\r\n";
+			if(e.type == 'comment' && i > 0 && dom[i-1].type == 'tag') {			
+				if( keep_help || text.indexOf('section:') == -1 ) {
+					output += "<!-- "+text+" -->\r\n";
+				}
+			}
 			else {
+				if(e.type == 'comment' && ( !(keep_help || text.indexOf('section:') == -1) )) {
+					//ignore if #section comment and help not needed
+					continue;
+				}
+			
 				if(e.type == 'text' && i == dom.length - 1 && i >= 1);
 				else output += "\r\n";
 
-				for(var t = 0 ; t < level ; t++) output += "\t";
+				if(e.type == 'text' && e.data.match(/^\S/) && i > 0 && dom[i-1].type == 'tag');//don't add tabs if text doesn't start with "SPACE"
+				else for(var t = 0 ; t < level ; t++) output += "\t";
+				
 				if(e.type == 'text') output += text;
 				else {
 
@@ -197,6 +217,7 @@ function pretty_print(dom , level) {
 				}
 				
 				if(e.type == 'text' && i < dom.length - 1 && dom[i+1].type == 'tag');
+				else if(e.type == 'comment' && i < dom.length - 2 && (dom[i+2].type == 'tag' || dom[i+2].type == 'script' || dom[i+2].type == 'style'));
 				else output += "\r\n";
 			}
 		}

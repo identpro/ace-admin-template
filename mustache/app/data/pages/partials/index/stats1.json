@@ -1,28 +1,28 @@
 [
  {
   "color" : "green",
-  "icon" : "icon-comments",
+  "icon" : "fa fa-comments",
   "number" : "32",
   "content" : ["comments + 2 reviews"],
   "stat-success" : "8%"
  } ,
  {
   "color" : "blue",
-  "icon" : "icon-twitter",
+  "icon" : "fa fa-twitter",
   "number" : "11",
   "content" : ["new followers"],
   "badge-success" : "+32%"
  } ,
  {
   "color" : "pink",
-  "icon" : "icon-shopping-cart",
+  "icon" : "fa fa-shopping-cart",
   "number" : "8",
   "content" : ["new orders"],
   "stat-important" : "4%"
  } ,
  {
   "color" : "red",
-  "icon" : "icon-beaker",
+  "icon" : "fa fa-flask",
   "number" : "7",
   "content" : ["experiments"]
  } ,

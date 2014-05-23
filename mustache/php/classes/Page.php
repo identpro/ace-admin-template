@@ -19,6 +19,14 @@ class Page {
 	$filename = "{$this->data_dir}/{$this->type}s/{$this->name}.json";
 	$data = file_get_contents($filename);
 	$this->vars = json_decode($data , TRUE);
+
+	if(isset($this->vars['alias'])) {
+		$this->name = $this->vars['alias'];
+		$filename = "{$this->data_dir}/{$this->type}s/{$this->name}.json";
+		$data = file_get_contents($filename);
+		$this->vars = array_merge(json_decode($data , TRUE) , $this->vars);
+	}
+
 	if($this->type != "layout" && !isset($this->vars["layout"]))//if no default layout for this page, then consider it to be "default"
 		$this->vars["layout"] = "default";
 
@@ -123,7 +131,6 @@ class Page {
 
 
  
- 
 
 
  public function get_template() {
@@ -138,6 +145,9 @@ class Page {
 		return $result;
 	}
 	return $this->vars[$name];
+ }
+ public function get_name() {
+	return $this->name;
  }
 
 }

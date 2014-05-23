@@ -14,7 +14,7 @@
  {
   "color" : "grey",
   "small" : true , "dark" : true,
-  "icon" : "icon-download-alt",
+  "icon" : "fa fa-download",
   "content" : ["Downloads" , "1,205"]
  }
 ]

@@ -21,6 +21,15 @@ module.exports = function(params) {
 	var filename = $data_dir +"/"+$type+"s/"+ $name + '.json';
 	var data = fs.readFileSync(filename, 'utf-8')
 	$vars = JSON.parse(data);
+	
+	if('alias' in $vars) {
+		$name = $vars['alias'];
+		filename = $data_dir +"/"+$type+"s/"+ $name + '.json';
+		data = fs.readFileSync(filename, 'utf-8')
+		$vars = extend(JSON.parse(data), $vars)
+	}
+
+	
 	if($type != "layout" && !("layout" in $vars)) $vars["layout"] = "default";
 
 	map_script_names();
@@ -181,5 +190,9 @@ module.exports = function(params) {
  this.get_var = function(name , undefined) {
 	return name in $vars ? $vars[name] : undefined;
  }
+ this.get_name= function() {
+	return $name;
+ }
 
+ 
 }

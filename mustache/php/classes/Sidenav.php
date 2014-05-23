@@ -26,7 +26,10 @@ class Sidenav {
 	$ret = false;
 	foreach($navList as &$item)
 	{
-	 $item['icon'] = isset($item['icon']) ? $item['icon'] : false;//if there is no icon for this item, we set it as false, otherwise in recursive modes it will lookup the parent's scope and use that one's icon istrad
+	 $item['icon'] = isset($item['icon']) ? $item['icon'] : false;
+	 //if there is no icon for this item, we set it as false
+	 //otherwise in recursive modes it will lookup the parent's scope and use that one's icon (Mustache only)
+	 
 	 $item['class'] = isset($item['class']) ? $item['class'] : false;//same as above
 	 $item['submenu?'] = isset($item['submenu']);//same as above
 	 $item['label'] = isset($item['label']) ? $item['label'] : false;

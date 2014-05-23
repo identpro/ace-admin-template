@@ -30,7 +30,10 @@ module.exports = function() {
 	 if(!navList.hasOwnProperty(i)) continue;
 	 var item = navList[i];
 	 
-	 item['icon'] = item['icon'] || false;//if there is no icon for this item, we set it as false, otherwise in recursive modes it will lookup the parent's scope and use that one's icon istrad
+	 item['icon'] = item['icon'] || false;
+	 //if there is no icon for this item, we set it as false
+	 //otherwise in recursive modes it will lookup the parent's scope and use that one's icon (Mustache only)
+
 	 item['class'] = item['class'] || false;//same as above
 	 item['submenu?'] = ('submenu' in item);//same as above
 	 item['badge'] = item['badge'] || false;//same as above
@@ -61,11 +64,14 @@ module.exports = function() {
 		{
 			item['class'] = 'active open';//an item in the submenu of this item is active, so set this as "active" & "open"
 			
-			//make the array if it doesn't exist
+			//create the array if it doesn't exist
 			$breadcrumbs['links'] = $breadcrumbs['links'] || [];
 			//add the parent of this active submenu item to the breadcrumbs list
-			$breadcrumbs['links'].push({'link': (item['link'] ? item['link']+'.html' : '#'), 'title':item['title']});
-			
+			$breadcrumbs['links'].push({
+				'link': item['link'] || '#',
+				'title': item['title']
+			});
+
 			ret = true;
 		}
 	 }//it has submenu

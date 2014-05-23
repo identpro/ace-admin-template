@@ -6,7 +6,7 @@
  {
  "title" : "Location",
  "content" : [{"id" : "country" , "value" : "Netherlands"}, {"id" : "city" , "value" : "Amsterdam"}],
- "icon" : "icon-map-marker"
+ "icon" : "fa fa-map-marker"
  } ,
  {
  "title" : "Age",
@@ -14,7 +14,7 @@
  } ,
  {
  "title" : "Joined",
- "content" : [{"id" : "signup" , "value" : "20/06/2010"}]
+ "content" : [{"id" : "signup" , "value" : "2010/06/20"}]
  } ,
  {
  "title" : "Last Online",
