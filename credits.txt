@@ -1,3 +1,25 @@
+v1.3.3:
+  PACE progress bars
+	*  http://github.hubspot.com/pace/
+
+v1.3.2:
+  jQuery raty
+	*  http://wbotelhos.com/raty/
+  Dual listbox
+	*  http://www.virtuosoft.eu/code/bootstrap-duallistbox/
+  Multiselect
+	*  https://github.com/davidstutz/bootstrap-multiselect
+  jQuery mousewheel
+	*  https://github.com/jquery/jquery-mousewheel
+  Grunt
+	*  http://gruntjs.com/
+
+v1.3.1:
+  typeahead.js
+	*  https://github.com/twitter/typeahead.js
+  CodeMirror:
+	*  http://codemirror.net/
+
 v1.3:
   Bootstrap datetime picker:
 	*  http://eonasdan.github.io/bootstrap-datetimepicker/
