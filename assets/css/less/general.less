@@ -1,7 +1,7 @@
 //some page-content variables
 @content-bg: #FFF;
 @content-header-border: #E2E2E2;
-@content-header-color: #2679B5;
+@content-header-color: #009EE3;
 @content-header-small-color: #8089A0;
 
 
@@ -18,7 +18,7 @@ body {
   font-family: 'Open Sans';
   font-size: @baseFontSize;
   color: @text-color;
-  
+
   line-height: 1.5;
 }
 
@@ -31,18 +31,18 @@ body {
 		content: "";
 		position: absolute;
 		z-index: -2;
-		
+
 		width: 100%;
 		max-width: inherit;
 		bottom: 0;
 		top: 0;
-		
+
 		background-color: #FFF;
 	}
 
 	&.container {
 		&, .rtl & {padding-left: 0; padding-right: 0;}
-		
+
 		&:before {
 			@media (min-width: @screen-sm-min) {
 				.box-shadow(~"0 0 0 1px rgba(0,0,0,0.1)");
@@ -68,7 +68,7 @@ body {
 .page-header {
 	margin:0 0 12px;
 	border-bottom:1px dotted @content-header-border;
-	
+
 	padding-bottom: 16px;
     padding-top: 7px;
 
@@ -87,5 +87,3 @@ body {
 	  }//small
 	}//h1
 }
-
-
