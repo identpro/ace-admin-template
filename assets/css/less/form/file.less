@@ -3,7 +3,7 @@
 @file-input-border:#D5D5D5;
 @file-input-shadow:~"0 0 0 4px rgba(0,0,0,0.06)";
 
-@file-input-hover-border:#F59942;
+@file-input-hover-border:#C15E9C;
 @file-input-hover-shadow:~"0 0 0 4px rgba(245, 153, 66, 0.3)";
 
 @file-input-btn-bg:#6FB3E0;
@@ -28,11 +28,11 @@
 .ace-file-input {
   display: block;
   font-size: inherit;
- 
+
   position: relative;
   height: 30px;
   //line-height: 38px;
-  
+
   //margin-bottom: 9px;
 
   input[type=file] {
@@ -52,17 +52,17 @@
 	left: 0;
 	right: 0;
 	height: 30px;
- 
+
 	background-color:@file-input-bg;
 	border:1px solid @file-input-border;
 
 	cursor:pointer;
- 
+
 	//.box-shadow(@file-input-shadow);
 	.box-shadow(none);
- 
+
 	.transition(~"all 0.15s");
-	
+
 	&:hover {
 		//.box-shadow(@file-input-hover-shadow);
 		.box-shadow(none);
@@ -72,7 +72,7 @@
 	&:before {
 		 display: inline-block;
 		 content: attr(data-title);
-		  
+
 		 position: absolute;
 		 right: 0;
 		 top: 0;
@@ -81,19 +81,19 @@
 		 line-height: 24px;
 		 text-align: center;
 		 padding: 0 8px;
-		 
+
 		 background-color: @file-input-btn-bg;
 		 color: #FFF;
 		 font-size: @font-size-file-input-btn;
 		 font-weight: bold;
-		 
+
 		 border: 2px solid #FFF;
 		 border-left-width: 4px;
- 
+
 		.transition(~"all 0.3s");
 	}
-	
-	
+
+
 	.ace-file-name { //the file name container
 		display: inline-block;
 		height: 28px;
@@ -104,10 +104,10 @@
 		color:@file-input-name-color;
 		font-size: @font-size-file-input-name;
 		vertical-align: top;
-		 
+
 		position: static;
 		padding-left: 30px;
-		
+
 		&:after { //the file name
 			display: inline-block;
 			content: attr(data-title);
@@ -118,9 +118,9 @@
 		.ace-file-name {
 			color:@file-input-selected-name-color;
 		}
-		
+
 	}
-	
+
 	.@{icon} {
 		.ace-file-icon();
 	    background-color:@file-input-icon-bg;//should be here
@@ -147,7 +147,7 @@
 	}
 
   }
- 
+
   a:hover{
 	text-decoration:none;
   }
@@ -161,7 +161,7 @@
 	 text-align: center;
 	 height: 17px;
 	 line-height: 15px;
-	 
+
 	 font-size: 11px;
 	 font-weight: normal;
 
@@ -173,11 +173,11 @@
   .ace-file-container.selected + .remove {
 	 display: inline-block;
   }
-  
+
 }
 
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
     .ace-file-input input[type=file] {
 		position: absolute;
 		width: 0; height: 0;
@@ -236,13 +236,13 @@
   right: -10px;
   z-index: 99;
   background-color: rgba(0,0,0,0.5);
-  
+
   > .overlay-content {
 	display: inline-block;
 	position: relative;
 	top: 10%;
 	left: 0;
-	right: 0; 
+	right: 0;
 	text-align: center;
   }
 }
@@ -265,7 +265,7 @@
 	 &:before {//the button
 		 display: inline-block;
 		 content: attr(data-title);
-		  
+
 		 position: relative;
 		 right: 0;
 		 left: 0;
@@ -283,7 +283,7 @@
 		.ace-file-icon();
 	 }
 
-	 
+
 	 .ace-file-name {
 		position: relative;
 		display: block;
@@ -294,7 +294,7 @@
 		margin: 0 4px;
 		border-bottom: 1px solid #DDD;
 		text-align: left;
-		
+
 		&:first-child {
 			margin-top: 1px;
 		}
@@ -308,7 +308,7 @@
 			background-color: #FFF;
 			background-repeat: no-repeat;
 			background-position: center;
-	 
+
 			margin: 4px 8px 4px 1px;
 		}
 		&:after {//the file name
@@ -334,8 +334,8 @@
 
 	background-color: #FFF;
 	color: red;
-	
-	width: 23px; 
+
+	width: 23px;
 	height: 23px;
 	line-height: 15px;
   }
@@ -343,14 +343,14 @@
 	border-color: @file-multi-remove-color;
   }
 
-  
+
  .ace-file-overlay {
 	 position: absolute;
 	 top: -12px;
 	 bottom: -6px;
 	 left: -12px;
 	 right: -12px;
-	  
+
 	 > .overlay-content {
 		top: 20%;
 	 }
@@ -369,15 +369,15 @@
 	  height: auto;
 	  line-height: 64px;
 	  width: auto;
-	  
+
 	  font-size: @font-size-file-input-icon-large;
 	  color: #D5D5D5;
-	 
+
 	  margin: 4px 0;
 
 	  background-color: transparent;
 	}
-	
+
 	&.selected:after {
 		display:none;
 	}
@@ -386,13 +386,13 @@
 		margin-right:4px; margin-left:2px;
 		line-height:24px;
 	}
-	
-	
+
+
 	.ace-file-name.large {
 		text-align: center;
 		border-bottom: 1px solid #222;
 		margin: 0 1px 3px;
-		
+
 		&:last-child {
 			margin: 0 1px;
 			//border-bottom-width: 0;
@@ -415,7 +415,7 @@
 			padding: 0;
 		}
 	}
-	
+
 }
 
 
@@ -432,7 +432,7 @@
 			&:before {
 				background-color:transparent;
 			}
-			
+
 			.@{icon} {
 				border-color:#EEE;
 			}
