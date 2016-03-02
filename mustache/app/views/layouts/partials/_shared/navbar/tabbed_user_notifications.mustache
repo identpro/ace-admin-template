@@ -24,19 +24,23 @@
             <div class="tab-content">
 			  <div id="navbar-tasks" class="tab-pane in active">
 					<ul class="dropdown-menu-right dropdown-navbar dropdown-menu">
-						{{#layout.navbar_tasks.latest}}
-						<li>
-							<a href="#">
-								<div class="clearfix">
-									<span class="pull-left">{{title}}</span>
-									<span class="pull-right">{{percentage}}%</span>
-								</div>
-								<div class="progress progress-mini {{progress-class}}">
-									<div style="width:{{percentage}}%" class="progress-bar {{progress-bar-class}}"></div>
-								</div>
-							</a>
+						<li class="dropdown-content">
+							<ul class="dropdown-menu dropdown-navbar">
+							{{#layout.navbar_tasks.latest}}
+								<li>
+									<a href="#">
+										<div class="clearfix">
+											<span class="pull-left">{{title}}</span>
+											<span class="pull-right">{{percentage}}%</span>
+										</div>
+										<div class="progress progress-mini {{progress-class}}">
+											<div style="width:{{percentage}}%" class="progress-bar {{progress-bar-class}}"></div>
+										</div>
+									</a>
+								</li>
+							{{/layout.navbar_tasks.latest}}
+							</ul>
 						</li>
-						{{/layout.navbar_tasks.latest}}
 
 						<li class="dropdown-footer">
 							<a href="#">
@@ -71,7 +75,7 @@
 						</li>
 						
 						<li class="dropdown-footer">
-							<a href="{{#createLinkFunction}}inbox{{/createLinkFunction}}">
+							<a href="{{^site.ajax}}{{#createLinkFunction}}inbox{{/createLinkFunction}}{{/site.ajax}}{{#site.ajax}}{{#createAjaxLinkFunction}}inbox{{/createAjaxLinkFunction}}{{/site.ajax}}">
 								See all messages
 								<i class="ace-icon fa fa-arrow-right"></i>
 							</a>

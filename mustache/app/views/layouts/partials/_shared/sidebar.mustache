@@ -1,5 +1,5 @@
 {{#page.responsive_style_2}}
-  <a href="#" class="menu-toggler invisible" id="menu-toggler"></a>
+  <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
 {{/page.responsive_style_2}}
 <!-- #section:basics/sidebar{{#page.horizontal-menu}}.horizontal{{/page.horizontal-menu}} -->
 <div id="sidebar" class="sidebar
@@ -13,11 +13,12 @@
 
 {{#page.side_menu_collapsible}} navbar-collapse collapse{{/page.side_menu_collapsible}}
 {{#page.responsive_style_2}} responsive-min{{/page.responsive_style_2}}
-">
+ace-save-state">
 
-	<script type="text/javascript">
-	try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-	</script>
+<script type="text/javascript">
+ try{ace.settings.loadState('sidebar')}catch(e){}
+</script>
+
 
 	{{> layout.sidebar.shortcuts}}
 
@@ -28,9 +29,11 @@
 	</ul><!-- /.nav-list -->
 
 	<!-- #section:basics/sidebar.layout.minimize -->
-	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-		<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+	{{^page.horizontal-menu}}
+	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">		
+		<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
 	</div>
+	{{/page.horizontal-menu}}
 	{{#page.responsive_style_2}}{{!for expanding minimized menu in small devices}}
 	<div class="sidebar-toggle sidebar-expand" id="sidebar-expand">
 		<i class="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-right" data-icon2="ace-icon fa fa-angle-double-left"></i>
@@ -38,8 +41,5 @@
 	{{/page.responsive_style_2}}
 	<!-- /section:basics/sidebar.layout.minimize -->
 
-	<script type="text/javascript">
-	try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-	</script>
 </div>
 <!-- /section:basics/sidebar{{#page.horizontal-menu}}.horizontal{{/page.horizontal-menu}} -->

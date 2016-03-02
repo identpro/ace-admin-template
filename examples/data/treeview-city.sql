@@ -1,7 +1,7 @@
 CREATE TABLE city (
   id INTEGER PRIMARY KEY,
   parent INTEGER,
-  name TEXT
+  text TEXT
 );
 
 

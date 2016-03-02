@@ -9,10 +9,11 @@ jQuery(function($) {
 	var $window = $(window);
 
 	//return if sidebar is not fixed or in mobile view mode
-	if( !fixed || ( ace.helper.mobile_view() || ace.helper.collapsible() ) ) {
-		$sidebar.removeClass('hide-before');
+	var sidebar_vars = $sidebar.ace_sidebar('vars');
+	if( !fixed || ( sidebar_vars['mobile_view'] || sidebar_vars['collapsible'] ) ) {
+		$sidebar.removeClass('lower-highlight');
 		//restore original, default marginTop
-		ace.helper.removeStyle(sidebar , 'margin-top')
+		sidebar.style.marginTop = '';
 
 		$window.off('scroll.ace.top_menu')
 		return;
@@ -29,13 +30,13 @@ jQuery(function($) {
 
 		if (scroll > 16) {			
 			if(!done) {
-				$sidebar.addClass('hide-before');
+				$sidebar.addClass('lower-highlight');
 				done = true;
 			}
 		}
 		else {
 			if(done) {
-				$sidebar.removeClass('hide-before');
+				$sidebar.removeClass('lower-highlight');
 				done = false;
 			}
 		}

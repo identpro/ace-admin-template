@@ -42,6 +42,7 @@ module.exports = function(params) {
 	$views_dir = params.path['views'];
 	if($type == 'page') {
 		if(fs.existsSync($views_dir + '/assets/scripts/' + $name + '.js')) {
+			/**
 			if(params.compressor) {
 				wait_for_compression = true;
 				params.compressor.compress($views_dir + '/assets/scripts/' + $name + '.js', {
@@ -52,15 +53,17 @@ module.exports = function(params) {
 					$vars['inline_scripts'] = data;
 					callback.call();
 				});
-			} 
-			else $vars['inline_scripts'] = fs.readFileSync($views_dir + '/assets/scripts/' + $name + '.js' , 'utf-8');
+			}
+			else
+			*/
+			$vars['inline_scripts'] = (fs.readFileSync($views_dir + '/assets/scripts/' + $name + '.js' , 'utf-8')).replace(/\{\{\{path\.assets\}\}\}/ig , params.path['assets']);
 		}
 		if(fs.existsSync($views_dir + '/assets/styles/' + $name + '.css')) {
 			$vars['inline_styles'] = fs.readFileSync($views_dir + '/assets/styles/' + $name + '.css' , 'utf-8')
 		}
 	}
 
-	if( ! wait_for_compression && typeof callback === "function" ) callback.call();
+	if( !wait_for_compression && typeof callback === "function" ) callback.call();
 
  }
 
@@ -143,7 +146,7 @@ module.exports = function(params) {
 	  var which = mappables[m]
 	  if($vars[which+'s']) {//if we have $vars["scripts"] or $vars["styles"]
 		var page_scripts = $vars[which+'s'];
-		var map_json = JSON.parse(fs.readFileSync($data_dir + "/common/"+which+"-mapping.json"));
+		var map_json = JSON.parse(fs.readFileSync($data_dir + "/common/"+which+"-mapping"+(params.path['minified'] ? '.min' : '')+".json"));
 		var mapped_scripts = [];
 		for(var i in page_scripts) {
 			if(page_scripts[i] in map_json) {

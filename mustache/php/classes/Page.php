@@ -33,7 +33,7 @@ class Page {
 	$this->views_dir = $options['path']['views'];
 	if($this->type == 'page') {
 		if(is_file("{$this->views_dir}/assets/scripts/{$this->name}.js")) {
-			$this->vars['inline_scripts'] = file_get_contents("{$this->views_dir}/assets/scripts/{$this->name}.js");
+			$this->vars['inline_scripts'] = str_ireplace("{{{path.assets}}}", $options['path']['assets'] , file_get_contents("{$this->views_dir}/assets/scripts/{$this->name}.js"));
 		}
 		if(is_file("{$this->views_dir}/assets/styles/{$this->name}.css")) {
 			$this->vars['inline_styles'] = file_get_contents("{$this->views_dir}/assets/styles/{$this->name}.css");

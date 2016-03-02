@@ -9,9 +9,10 @@ jQuery(function($) {
 	//editables 
 	
 	//text editable
-    $('#username').editable({
+    $('#username')
+	.editable({
 		type: 'text',
-		name: 'username'
+		name: 'username'		
     });
 
 
@@ -171,6 +172,7 @@ jQuery(function($) {
 			type: 'image',
 			name: 'avatar',
 			value: null,
+			//onblur: 'ignore',  //don't reset or hide editable onblur?!
 			image: {
 				//specify ace file input plugin's options here
 				btn_choose: 'Change Avatar',
@@ -244,7 +246,19 @@ jQuery(function($) {
 		})
 	}catch(e) {}
 	
-	
+	/**
+	//let's display edit mode by default?
+	var blank_image = true;//somehow you determine if image is initially blank or not, or you just want to display file input at first
+	if(blank_image) {
+		$('#avatar').editable('show').on('hidden', function(e, reason) {
+			if(reason == 'onblur') {
+				$('#avatar').editable('show');
+				return;
+			}
+			$('#avatar').off('hidden');
+		})
+	}
+	*/
 
 	//another option is using modals
 	$('#avatar2').on('click', function(){
@@ -398,6 +412,7 @@ jQuery(function($) {
 	})
 	$('.input-mask-phone').mask('(999) 999-9999');
 
+	$('#user-profile-3').find('input[type=file]').ace_file_input('show_file_list', [{type: 'image', name: $('#avatar').attr('src')}]);
 
 
 	////////////////////
@@ -407,6 +422,17 @@ jQuery(function($) {
 		var which = parseInt(target.val());
 		$('.user-profile').parent().addClass('hide');
 		$('#user-profile-'+which).parent().removeClass('hide');
+	});
+	
+	
+	
+	/////////////////////////////////////
+	$(document).one('ajaxloadstart.page', function(e) {
+		//in ajax mode, remove remaining elements before leaving page
+		try {
+			$('.editable').editable('destroy');
+		} catch(e) {}
+		$('[class*=select2]').remove();
 	});
 });
 

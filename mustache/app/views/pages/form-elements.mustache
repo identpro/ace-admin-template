@@ -113,7 +113,6 @@
 	</div>
 
 
-
 	<div class="clearfix form-actions">
 		<div class="col-md-offset-3 col-md-9">
 			<button class="btn btn-info" type="button"><i class="ace-icon fa fa-check bigger-110"></i> Submit</button>
@@ -259,7 +258,7 @@
 				<div>
 					<label for="form-field-select-3">Chosen</label>
 					<br />
-					<select class="chosen-select" id="form-field-select-3" data-placeholder="Choose a State...">
+					<select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a State...">
 						 <option value=""> </option>
 						 {{#page.states}}
 						  <option value='{{abbr}}'>{{name}}</option>
@@ -292,7 +291,7 @@
 					</div>
 					<div class="space-2"></div>
 					
-					<select multiple class="chosen-select" id="form-field-select-4" data-placeholder="Choose a State...">
+					<select multiple class="chosen-select form-control" id="form-field-select-4" data-placeholder="Choose a State...">
 						  {{#page.states}}
 						  <option value='{{abbr}}'>{{name}}</option>
 						  {{/page.states}}
@@ -337,6 +336,11 @@
 					<input name="form-field-checkbox" disabled type="checkbox" class="ace" /><span class="lbl"> disabled</span>
 				</label>
 			</div>
+			<div class="checkbox">
+				<label class="block">
+					<input name="form-field-checkbox" type="checkbox" class="ace input-lg" /><span class="lbl bigger-120"> large checkbox</span>
+				</label>
+			</div>
 			<!-- /section:custom/checkbox -->
 		</div>
 	  </div>
@@ -362,6 +366,11 @@
 			<div class="radio">
 				<label>
 					<input disabled name="form-field-radio" type="radio" class="ace" /><span class="lbl"> disabled</span>
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input name="form-field-radio" type="radio" class="ace input-lg" /><span class="lbl bigger-120"> large radio</span>
 				</label>
 			</div>
 		</div>
@@ -541,11 +550,13 @@
 				<div class="widget-body">
 				 <div class="widget-main">
 					<!-- #section:plugins/fuelux.spinner -->
-					<input type="text" class="input-mini" id="spinner1" />
+					<input type="text" id="spinner1" />
 					 <div class="space-6"></div>
-					<input type="text" class="input-mini" id="spinner2" />
+					<input type="text" class="input-sm" id="spinner2" />
 					 <div class="space-6"></div>
-					<input type="text" class="input-mini" id="spinner3" />
+					<input type="text" id="spinner3" />
+					 <div class="space-6"></div>
+					<input type="text" class="input-lg" id="spinner4" />
 					<!-- /section:plugins/fuelux.spinner -->
 				 </div>
 				</div>
@@ -585,7 +596,7 @@
 									<span class="input-group-addon">
 										<i class="fa fa-calendar bigger-110"></i>
 									</span>
-								</div>								
+								</div>
 							</div>
 						</div>
 						
@@ -727,7 +738,7 @@
 							</div>
 							<div class="col-xs-6  center">
 								<div class="knob-container inline">
-									<input type="text" class="input-small knob" value="41" data-min="0" data-max="100" data-width="80" data-height="80" data-thickness=".2" data-fgColor="#87B87F" data-displayPrevious=true data-angleArc=250 data-angleOffset=-125 />
+									<input type="text" class="input-small knob" value="41" data-min="0" data-max="100" data-width="80" data-height="80" data-thickness=".2" data-fgColor="#87B87F" data-displayPrevious="true" data-angleArc="250" data-angleOffset="-125" />
 								</div>
 								<!-- /section:plugins/charts.knob -->
 							</div>
@@ -735,7 +746,7 @@
 						  <div class="row">
 							<div class="col-xs-12 center">
 								<div class="knob-container inline">
-									<input type="text" class="input-small knob" data-min="0" data-max="10"  data-width="150" data-height="150" data-thickness=".2" data-fgColor="#B8877F" data-angleOffset=90 data-cursor="true" />
+									<input type="text" class="input-small knob" value="1" data-min="0" data-max="10"  data-width="150" data-height="150" data-thickness=".2" data-fgColor="#B8877F" data-angleOffset=90 data-cursor="true" />
 								</div>
 							</div>
 						  </div>
@@ -820,10 +831,32 @@
 			<form class="form-search">
 			  <div class="row">
 			   <div class="col-xs-12 col-sm-8">
+				
 				<div class="input-group">
+					<span class="input-group-addon"><i class="ace-icon fa fa-check"></i></span>
 					<input type="text" class="form-control search-query" placeholder="Type your query" />
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-purple btn-sm">Search <i class="ace-icon fa fa-search icon-on-right bigger-110"></i></button>
+						<button type="button" class="btn btn-purple btn-sm"><span class="ace-icon fa fa-search icon-on-right bigger-110"></span> Search</button>
+					</span>
+				</div>
+				
+				<div class="hr"></div>
+				
+				<div class="input-group input-group-lg">
+					<span class="input-group-addon"><i class="ace-icon fa fa-check"></i></span>
+					<input type="text" class="form-control search-query" placeholder="Type your query" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default btn-lg"><span class="ace-icon fa fa-search icon-on-right bigger-110"></span> Search</button>
+					</span>
+				</div>
+				
+				<div class="hr"></div>
+				
+				<div class="input-group">
+					<span class="input-group-addon"><i class="ace-icon fa fa-check"></i></span>
+					<input type="text" class="form-control search-query" placeholder="Type your query" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-inverse btn-white"><span class="ace-icon fa fa-search icon-on-right bigger-110"></span> Search</button>
 					</span>
 				</div>
 			   </div>
@@ -844,7 +877,7 @@
 		<h4 class="blue bigger">Please fill the following form fields</h4>
 	</div>
 	
-	<div class="modal-body">{{! for chosen not to cause scroll}}
+	<div class="modal-body">
 		<div class="row">
 
 			<div class="col-xs-12 col-sm-5">
@@ -872,7 +905,7 @@
 				<div class="form-group">
 					<label for="form-field-username">Username</label>
 					<div>
-						<input class="input-large" type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
+						<input type="text" id="form-field-username" placeholder="Username" value="alexdoe" />
 					</div>
 				</div>
 				
@@ -881,8 +914,8 @@
 				<div class="form-group">
 					<label for="form-field-first">Name</label>
 					<div>
-						<input class="input-medium" type="text" id="form-field-first" placeholder="First Name" value="Alex" />
-						<input class="input-medium" type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
+						<input type="text" id="form-field-first" placeholder="First Name" value="Alex" />
+						<input type="text" id="form-field-last" placeholder="Last Name" value="Doe" />
 					</div>
 				</div>
 

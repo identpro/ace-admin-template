@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   var path = require('path');
   var generateRTL = require('./build/rtl.js');
   var fixIE = require('./build/files/fix-ie.js');//fix IE9- CSS limit issue
+  var fixPreview = require('./build/front.js');
 
   function getAceJs(type) {
 	var jsList = grunt.file.readJSON('assets/js/ace/scripts.json');
@@ -34,7 +35,8 @@ module.exports = function (grunt) {
     // Task configuration.
     clean: {
       dist: ['dist'],
-	  all: ['dist', 'demo', 'html']
+	  all: ['dist', 'demo', 'html'],
+	  front: ['frontend/**.min']
     },
 
     concat: {
@@ -82,6 +84,11 @@ module.exports = function (grunt) {
 	
 	
 	less: {
+	  main: {
+        files: {
+          'assets/css/ace.css': 'assets/css/less/ace.less'
+        }
+      },
       ace: {
         files: {
           'assets/css/ace.css': 'assets/css/less/ace.less',
@@ -89,7 +96,12 @@ module.exports = function (grunt) {
 		  'assets/css/ace-rtl.less.css': 'assets/css/less/ace-rtl.less',
 		  'assets/css/bootstrap.css': 'assets/css/less/bootstrap/bootstrap.less'
         }
-      }
+      },
+	  front: {
+		files: {
+          'frontend/frontend.css': 'assets/css/less/ace-frontend.less'
+        }
+	  }
     },
 
 	cssmin: {
@@ -139,16 +151,16 @@ module.exports = function (grunt) {
 	
 	exec: {
 	  html: {
-        command: 'node mustache/js/index.js --output_folder="../../../html" --onpage_help=true --development=true'
+        command: 'node mustache/js/index.js --output_folder="../../html" --onpage_help=true --development=true'
       },
 	  html_ajax: {
-        command: 'node mustache/js/ajax.js --output_folder="../../../html" --onpage_help=true --development=true'
+        command: 'node mustache/js/ajax.js --output_folder="../../html" --onpage_help=true --development=true'
       },
       demo: {
-        command: 'node mustache/js/index.js --output_folder="../../../demo" --path_minified="\\.min" --path_base="." --path_assets="dist" --path_images="dist/images" --demo=true --onpage_help=false --development=false --protocol=false --remote_jquery=true --remote_fonts=true --remote_bootstrap_js=true --remote_fontawesome=true'
+        command: 'node mustache/js/index.js --output_folder="../../demo" --path_minified=".min" --path_base="." --path_assets="dist" --path_images="dist/images" --demo=true --onpage_help=false --development=false --protocol=false --remote_jquery=true --remote_fonts=true --remote_bootstrap_js=true --remote_fontawesome=true'
       },
 	  demo_ajax: {
-        command: 'node mustache/js/ajax.js --output_folder="../../../demo" --path_minified="\\.min" --path_base=".../" --path_assets=".../dist" --path_images=".../dist/images" --demo=true --onpage_help=false --development=false --protocol=false --remote_jquery=true --remote_fonts=true --remote_bootstrap_js=true --remote_fontawesome=true'
+        command: 'node mustache/js/ajax.js --output_folder="../../demo" --path_minified=".min" --path_base="../" --path_assets="../dist" --path_images="../dist/images" --demo=true --onpage_help=false --development=false --protocol=false --remote_jquery=true --remote_fonts=true --remote_bootstrap_js=true --remote_fontawesome=true'
       }
     },
 	
@@ -160,9 +172,15 @@ module.exports = function (grunt) {
 		  level: 9
 		},
 		files: [
-		  { expand: true, cwd: './demo', src: ['**', '!**/readme**', '!**/Copy **'],	dest: '.' },
-		  { expand: true, cwd: './dist', src: ['**', '!**/readme**', '!**/Copy **'],	dest: './dist' },
-		  { expand: true, cwd: './build/demo', src: ['**', '!**/readme**', '!**/Copy **'],	dest: './build/demo' }
+		  { expand: true, cwd: './demo', src: ['**', '!**/readme**', '!**/Copy **', '!**/**- Copy**'],	dest: '.' },
+		  { expand: true, cwd: './dist', src: ['**', '!**/readme**', '!**/Copy **', '!**/**- Copy**'],	dest: './dist' },
+		  { expand: true, cwd: './build/demo', src: ['**', '!**/readme**', '!**/Copy **', '!**/**- Copy**'],	dest: './build/demo' },
+		  { expand: true, cwd: './frontend', src: ['**', '!**.html'],	dest: './frontend', 
+			rename: function(dest, src) {
+				var out = src.replace('.min', '');
+				return dest + '/' + out;
+			}
+		}
 		]
 	  },
 	  template: {
@@ -172,14 +190,16 @@ module.exports = function (grunt) {
 		  level: 9
 		},
 		files: [
-		  { cwd: './', src: ['changelog', 'credits.txt', 'dummy.html', 'Gruntfile.js', 'index.html', 'package.json'],	dest: '.' },
-		  { expand: true, cwd: './assets', src: ['**', '!**/Copy **'], dest: './assets' },
-		  { expand: true, cwd: './build', src: ['**', '!**/node_modules/**', '!**/Copy **'],	dest: './build' },
+		  { cwd: './', src: ['changelog', 'credits.txt', 'dummy.html', 'Gruntfile.js', 'index.html', 'package.json'],	dest: '.' },		  
+		  { expand: true, cwd: './assets', src: ['**', '!**/Copy **', '!**/**- Copy**', '!**/*.rar'], dest: './assets' },
+		  { expand: true, cwd: './build', src: ['**', '!**/**node_modules**/**', '!**/**- Copy **'],	dest: './build' },
 		  { expand: true, cwd: './dist', src: ['**', '!**/readme**'],	dest: './dist' },
-		  { expand: true, cwd: './docs', src: ['**', '!**/Copy **'], dest: './docs' },
-		  { expand: true, cwd: './examples', src: ['**', '!**/Copy **'], dest: './examples' },
+		  { expand: true, cwd: './docs', src: ['**', '!**/Copy **', '!**/**- Copy**'], dest: './docs' },
+		  { expand: true, cwd: './examples', src: ['**', '!**/Copy **', '!**/**- Copy**'], dest: './examples' },
 		  { expand: true, cwd: './html', src: ['**'], dest: './html' },
-		  { expand: true, cwd: './mustache', src: ['**', '!**/node_modules/**', '!**/_cache/*.php', '!**/Copy **'], dest: './mustache' }
+		  { cwd: './', src: ['require.html'],	dest: './html' },
+		  { expand: true, cwd: './mustache', src: ['**', '!**/**node_modules**/**', '!**/_cache/*.php', '!**/Copy **', '!**/**- Copy**'], dest: './mustache' },
+		  { expand: true, cwd: './frontend', src: ['**'],	dest: './frontend' }
 		]
 	  }
 	}
@@ -204,6 +224,9 @@ module.exports = function (grunt) {
   grunt.registerTask('fix-ie', 'Fix IE9- CSS limit issue.', function () {
     fixIE(grunt);
   });
+  grunt.registerTask('fix-preview', 'Fix assets path in some preview files (frontend).', function () {
+    fixPreview(grunt);
+  });
   
   grunt.registerTask('cleanup', 'Cleanup', function () {
     var files = [
@@ -215,9 +238,10 @@ module.exports = function (grunt) {
 
   
   //register tasks
-  grunt.registerTask('demo', ['exec:demo', 'exec:demo_ajax', 'compress:demo']);//build demo HTML and make zip file
-
+  grunt.registerTask('demo', ['exec:demo', 'exec:demo_ajax', 'fix-preview', 'compress:demo', 'clean:front']);//build demo HTML and make zip file
   grunt.registerTask('mustache', ['exec:html', 'exec:html_ajax']);//build HTML files
+  grunt.registerTask('release', ['mustache', 'compress:template']);//build template files and make zip file
+
   
   grunt.registerTask('css', ['less', 'make-rtl', 'fix-ie', 'cssmin:ace', 'cleanup']);//build Ace CSS
   grunt.registerTask('css-all', ['less', 'make-rtl', 'fix-ie', 'cssmin:all', 'cleanup']);//build all CSS

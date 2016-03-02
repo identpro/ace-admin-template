@@ -12,7 +12,7 @@
 			<ul class="dropdown-menu dropdown-navbar">
 			 {{#layout.navbar_messages.latest}}
 				<li>
-					<a href="#">
+					<a href="#" class="clearfix">
 						<img src="{{path.assets}}/avatars/{{img}}" class="msg-photo" alt="{{name}}'s Avatar">
 						<span class="msg-body">
 							<span class="msg-title">
@@ -30,7 +30,7 @@
 		</li>
 		
 		<li class="dropdown-footer">
-			<a href="{{#createLinkFunction}}inbox{{/createLinkFunction}}">
+			<a href="{{^site.ajax}}{{#createLinkFunction}}inbox{{/createLinkFunction}}{{/site.ajax}}{{#site.ajax}}{{#createAjaxLinkFunction}}inbox{{/createAjaxLinkFunction}}{{/site.ajax}}">
 				See all messages
 				<i class="ace-icon fa fa-arrow-right"></i>
 			</a>

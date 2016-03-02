@@ -10,7 +10,7 @@ jQuery(function($) {
 			scaleColor: false,
 			lineCap: 'butt',
 			lineWidth: parseInt(size/10),
-			animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
+			animate: ace.vars['old_ie'] ? false : 1000,
 			size: size
 		});
 	})
@@ -28,6 +28,9 @@ jQuery(function($) {
 	});
 
 
+  //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
+  //but sometimes it brings up errors with normal resize event handlers
+  $.resize.throttleWindow = false;
 
   var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
   var data = [
@@ -95,7 +98,10 @@ jQuery(function($) {
 	
  });
 
-
+	/////////////////////////////////////
+	$(document).one('ajaxloadstart.page', function(e) {
+		$tooltip.remove();
+	});
 
 
 
@@ -168,13 +174,14 @@ jQuery(function($) {
 	//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
 	//so disable dragging when clicking on label
 	var agent = navigator.userAgent.toLowerCase();
-	if("ontouchstart" in document && /applewebkit/.test(agent) && /android/.test(agent))
+	if(ace.vars['touch'] && ace.vars['android']) {
 	  $('#tasks').on('touchstart', function(e){
 		var li = $(e.target).closest('#tasks li');
 		if(li.length == 0)return;
 		var label = li.find('label.inline').get(0);
 		if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
-	});
+	  });
+	}
 
 	$('#tasks').sortable({
 		opacity:0.8,

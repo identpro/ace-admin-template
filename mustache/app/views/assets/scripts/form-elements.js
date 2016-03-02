@@ -14,25 +14,42 @@ jQuery(function($) {
 	});
 
 
-	$('.chosen-select').chosen({allow_single_deselect:true}); 
-	//resize the chosen on window resize
-	$(window).on('resize.chosen', function() {
-		var w = $('.chosen-select').parent().width();
-		$('.chosen-select').next().css({'width':w});
-	}).trigger('resize.chosen');
+	if(!ace.vars['touch']) {
+		$('.chosen-select').chosen({allow_single_deselect:true}); 
+		//resize the chosen on window resize
 
-	$('#chosen-multiple-style').on('click', function(e){
-		var target = $(e.target).find('input[type=radio]');
-		var which = parseInt(target.val());
-		if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-		 else $('#form-field-select-4').removeClass('tag-input-style');
-	});
+		$(window)
+		.off('resize.chosen')
+		.on('resize.chosen', function() {
+			$('.chosen-select').each(function() {
+				 var $this = $(this);
+				 $this.next().css({'width': $this.parent().width()});
+			})
+		}).trigger('resize.chosen');
+		//resize chosen on sidebar collapse/expand
+		$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
+			if(event_name != 'sidebar_collapsed') return;
+			$('.chosen-select').each(function() {
+				 var $this = $(this);
+				 $this.next().css({'width': $this.parent().width()});
+			})
+		});
+
+
+		$('#chosen-multiple-style .btn').on('click', function(e){
+			var target = $(this).find('input[type=radio]');
+			var which = parseInt(target.val());
+			if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+			 else $('#form-field-select-4').removeClass('tag-input-style');
+		});
+	}
 
 
 	$('[data-rel=tooltip]').tooltip({container:'body'});
 	$('[data-rel=popover]').popover({container:'body'});
+
+	autosize($('textarea[class*=autosize]'));
 	
-	$('textarea[class*=autosize]').autosize({append: "\n"});
 	$('textarea.limited').inputlimiter({
 		remText: '%n character%s remaining...',
 		limitText: 'max allowed : %n.'
@@ -90,7 +107,7 @@ jQuery(function($) {
 			}
 			$(ui.handle.firstChild).show().children().eq(1).text(val);
 		}
-	}).find('a').on('blur', function(){
+	}).find('span.ui-slider-handle').on('blur', function(){
 		$(this.firstChild).hide();
 	});
 	
@@ -133,12 +150,12 @@ jQuery(function($) {
 
 
 	$('#id-input-file-3').ace_file_input({
-		style:'well',
-		btn_choose:'Drop files here or click to choose',
-		btn_change:null,
-		no_icon:'ace-icon fa fa-cloud-upload',
-		droppable:true,
-		thumbnail:'small'//large | fit
+		style: 'well',
+		btn_choose: 'Drop files here or click to choose',
+		btn_change: null,
+		no_icon: 'ace-icon fa fa-cloud-upload',
+		droppable: true,
+		thumbnail: 'small'//large | fit
 		//,icon_remove:null//set null, to hide remove/reset button
 		/**,before_change:function(files, dropped) {
 			//Check an example below
@@ -162,6 +179,15 @@ jQuery(function($) {
 		//console.log($(this).data('ace_input_files'));
 		//console.log($(this).data('ace_input_method'));
 	});
+	
+	
+	//$('#id-input-file-3')
+	//.ace_file_input('show_file_list', [
+		//{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
+		//{type: 'file', name: 'hello.txt'}
+	//]);
+
+	
 	
 
 	//dynamically change allowed formats by changing allowExt && allowMime function
@@ -225,15 +251,29 @@ jQuery(function($) {
 			//on any case you still should check files with your server side script
 			//because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
 		});
+		
+		
+		/**
+		file_input
+		.off('file.preview.ace')
+		.on('file.preview.ace', function(e, info) {
+			console.log(info.file.width);
+			console.log(info.file.height);
+			e.preventDefault();//to prevent preview
+		});
+		*/
 	
 	});
 
 	$('#spinner1').ace_spinner({value:0,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
-	.on('change', function(){
-		//alert(this.value)
-	});
-	$('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, touch_spinner: true, icon_up:'ace-icon fa fa-caret-up', icon_down:'ace-icon fa fa-caret-down'});
-	$('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus smaller-75', icon_down:'ace-icon fa fa-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+	.closest('.ace-spinner')
+	.on('changed.fu.spinbox', function(){
+		//console.log($('#spinner1').val())
+	}); 
+	$('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, touch_spinner: true, icon_up:'ace-icon fa fa-caret-up bigger-110', icon_down:'ace-icon fa fa-caret-down bigger-110'});
+	$('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+	$('#spinner4').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus', icon_down:'ace-icon fa fa-minus', btn_up_class:'btn-purple' , btn_down_class:'btn-purple'});
+
 	//$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
 	//or
 	//$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
@@ -272,17 +312,37 @@ jQuery(function($) {
 	$('#timepicker1').timepicker({
 		minuteStep: 1,
 		showSeconds: true,
-		showMeridian: false
+		showMeridian: false,
+		disableFocus: true
+	}).on('focus', function() {
+		$('#timepicker1').timepicker('showWidget');
 	}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
 	
-	$('#date-timepicker1').datetimepicker().next().on(ace.click_event, function(){
+	
+
+	
+	if(!ace.vars['old_ie']) $('#date-timepicker1').datetimepicker({
+	 //format: 'MM/DD/YYYY h:mm:ss A',//use this option to display seconds
+	 icons: {
+		time: 'fa fa-clock-o',
+		date: 'fa fa-calendar',
+		up: 'fa fa-chevron-up',
+		down: 'fa fa-chevron-down',
+		previous: 'fa fa-chevron-left',
+		next: 'fa fa-chevron-right',
+		today: 'fa fa-arrows ',
+		clear: 'fa fa-trash',
+		close: 'fa fa-times'
+	 }
+	}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
 	
 
 	$('#colorpicker1').colorpicker();
+	//$('.colorpicker').last().css('z-index', 2000);//if colorpicker is inside a modal, its z-index should be higher than modal'safe
 
 	$('#simple-colorpicker-1').ace_colorpicker();
 	//$('#simple-colorpicker-1').ace_colorpicker('pick', 2);//select 2nd color
@@ -311,21 +371,22 @@ jQuery(function($) {
 			}
 			*/
 		  }
-		);
+		)
 
-		//programmatically add a new
+		//programmatically add/remove a tag
 		var $tag_obj = $('#form-field-tags').data('tag');
 		$tag_obj.add('Programmatically Added');
+		
+		var index = $tag_obj.inValues('some tag');
+		$tag_obj.remove(index);
 	}
 	catch(e) {
 		//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
 		tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
-		//$('#form-field-tags').autosize({append: "\n"});
+		//autosize($('#form-field-tags'));
 	}
 	
 	
-	
-
 	/////////
 	$('#modal-form input[type=file]').ace_file_input({
 		style:'well',
@@ -340,11 +401,13 @@ jQuery(function($) {
 	//and its width cannot be determined.
 	//so we set the width after modal is show
 	$('#modal-form').on('shown.bs.modal', function () {
-		$(this).find('.chosen-container').each(function(){
-			$(this).find('a:first-child').css('width' , '210px');
-			$(this).find('.chosen-drop').css('width' , '210px');
-			$(this).find('.chosen-search input').css('width' , '200px');
-		});
+		if(!ace.vars['touch']) {
+			$(this).find('.chosen-container').each(function(){
+				$(this).find('a:first-child').css('width' , '210px');
+				$(this).find('.chosen-drop').css('width' , '210px');
+				$(this).find('.chosen-search input').css('width' , '200px');
+			});
+		}
 	})
 	/**
 	//or you can activate the chosen plugin after modal is shown
@@ -353,5 +416,14 @@ jQuery(function($) {
 		$(this).find('.modal-chosen').chosen();
 	})
 	*/
+
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		autosize.destroy('textarea[class*=autosize]')
+		
+		$('.limiterBox,.autosizejs').remove();
+		$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
+	});
 
 });

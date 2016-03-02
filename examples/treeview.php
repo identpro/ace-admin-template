@@ -17,7 +17,7 @@
 	{
 		
 			$item = array(
-				'name' => $row['name'] ,
+				'text' => $row['text'] ,
 				'type' => $row['child_count'] > 0 ? 'folder' : 'item',
 				'additionalParameters' =>  array('id' => $row['id'])
 			);

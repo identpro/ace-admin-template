@@ -2,7 +2,7 @@
 //this defines a simple model class for loading basic page data which is read from a json file
 class Sidenav {
  private $navList = null;
- private $active_page = '';
+ private $active_page = null;
  private $breadcrumbs;
 
 
@@ -44,7 +44,7 @@ class Sidenav {
 	 //maybe using something like handlebars with a little bit of logic is better here
 	 //or perhaps not using recursive partials, and a different partial for each other
 
-	 if($this->active_page == $item['link'])
+	 if($this->active_page != null && $this->active_page == $item['link'])
 	 {
 		$item['class'] = 'active';
 		if($item['submenu?']) $item['class'] .= ' no-active-child';//rare case, it means that this item has been directly selected, not a child of it, so it's not opened and take care of the caret using "no-active-child" class

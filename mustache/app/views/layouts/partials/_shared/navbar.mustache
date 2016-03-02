@@ -2,17 +2,14 @@
 <div id="navbar" class="navbar navbar-default
 {{#page.user_menu_collapsible}} navbar-collapse{{/page.user_menu_collapsible}}
 {{^page.user_menu_collapsible}}{{#page.top_menu}} navbar-collapse{{/page.top_menu}}{{/page.user_menu_collapsible}}
-{{#page.horizontal-menu}} h-navbar{{/page.horizontal-menu}}">
+{{#page.horizontal-menu}} h-navbar{{/page.horizontal-menu}} ace-save-state">
 
-  <script type="text/javascript">
-	try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-  </script>
 
-  <div class="navbar-container" id="navbar-container">
+  <div class="navbar-container ace-save-state" id="navbar-container">
 	{{^page.side_menu_collapsible}}
 	  {{^page.responsive_style_2}}
 	    <!-- #section:basics/sidebar.mobile.toggle -->
-		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 			<span class="sr-only">Toggle sidebar</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>

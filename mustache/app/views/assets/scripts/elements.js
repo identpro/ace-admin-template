@@ -1,16 +1,16 @@
 jQuery(function($) {
 	/**
 	$('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-	  console.log(e.target.getAttribute("href"));
+	  //console.log(e.target.getAttribute("href"));
 	})
 		
 	$('#accordion').on('shown.bs.collapse', function (e) {
-		console.log($(e.target).is('#collapseTwo'))
+		//console.log($(e.target).is('#collapseTwo'))
 	});
 	*/
 	
 	$('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		if($(e.target).attr('href') == "#home") drawChartNow();
+		//if($(e.target).attr('href') == "#home") doSomethingNow();
 	})
 
 	
@@ -30,7 +30,6 @@ jQuery(function($) {
 	//$('[href="#collapseTwo"]').trigger('click');
 
 
-	var oldie = /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase());
 	$('.easy-pie-chart.percentage').each(function(){
 		$(this).easyPieChart({
 			barColor: $(this).data('color'),
@@ -38,7 +37,7 @@ jQuery(function($) {
 			scaleColor: false,
 			lineCap: 'butt',
 			lineWidth: 8,
-			animate: oldie ? false : 1000,
+			animate: ace.vars['old_ie'] ? false : 1000,
 			size:75
 		}).css('color', $(this).data('color'));
 	});
@@ -51,7 +50,7 @@ jQuery(function($) {
 		$.gritter.add({
 			title: 'This is a regular notice!',
 			text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="blue">magnis dis parturient</a> montes, nascetur ridiculus mus.',
-			image: $path_assets+'/avatars/avatar1.png',
+			image: '{{{path.assets}}}/avatars/avatar1.png', //in Ace demo {{{path.assets}}} will be replaced by correct assets path
 			sticky: false,
 			time: '',
 			class_name: (!$('#gritter-light').get(0).checked ? 'gritter-light' : '')
@@ -64,7 +63,7 @@ jQuery(function($) {
 		var unique_id = $.gritter.add({
 			title: 'This is a sticky notice!',
 			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="red">magnis dis parturient</a> montes, nascetur ridiculus mus.',
-			image: $path_assets+'/avatars/avatar.png',
+			image: '{{{path.assets}}}/avatars/avatar.png',
 			sticky: true,
 			time: '',
 			class_name: 'gritter-info' + (!$('#gritter-light').get(0).checked ? ' gritter-light' : '')
@@ -91,7 +90,7 @@ jQuery(function($) {
 		$.gritter.add({
 			title: 'This is a notice with a max of 3 on screen at one time!',
 			text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="green">magnis dis parturient</a> montes, nascetur ridiculus mus.',
-			image: $path_assets+'/avatars/avatar3.png',
+			image: '{{{path.assets}}}/avatars/avatar3.png', //in Ace demo {{{path.assets}}} will be replaced by correct assets path
 			sticky: false,
 			before_open: function(){
 				if($('.gritter-item-wrapper').length >= 3)
@@ -175,11 +174,12 @@ jQuery(function($) {
 		);
 	});
 **/
-		
+	
+
 	$("#bootbox-options").on(ace.click_event, function() {
 		bootbox.dialog({
 			message: "<span class='bigger-110'>I am a custom dialog with smaller buttons</span>",
-			buttons: 			
+			buttons:
 			{
 				"success" :
 				 {
@@ -225,13 +225,13 @@ jQuery(function($) {
 		$this.hide().after('<span />');
 		$this.next().addClass('ui-slider-small').
 		addClass("inline ui-slider-"+slide_styles[ii++ % slide_styles.length]).
-		css({'width':'125px'}).slider({
+		css('width','125px').slider({
 			value:parseInt($this.val()),
 			range: "min",
 			animate:true,
-			min: parseInt($this.data('min')),
-			max: parseInt($this.data('max')),
-			step: parseFloat($this.data('step')),
+			min: parseInt($this.attr('data-min')),
+			max: parseInt($this.attr('data-max')),
+			step: parseFloat($this.attr('data-step')) || 1,
 			slide: function( event, ui ) {
 				$this.val(ui.value);
 				spinner_update();
@@ -241,8 +241,7 @@ jQuery(function($) {
 
 
 
-
-
+	//CSS3 spinner
 	$.fn.spin = function(opts) {
 		this.each(function() {
 		  var $this = $(this),
@@ -264,6 +263,7 @@ jQuery(function($) {
 		$('#spinner-opts input[type=text]').each(function() {
 			opts[this.name] = parseFloat(this.value);
 		});
+		opts['left'] = 'auto';
 		$('#spinner-preview').spin(opts);
 	}
 
@@ -273,5 +273,15 @@ jQuery(function($) {
 		$('.nav-pills').toggleClass('nav-stacked');
 	});
 
+	
+	
+	
+	
+	
+	///////////
+	$(document).one('ajaxloadstart.page', function(e) {
+		$.gritter.removeAll();
+		$('.modal').modal('hide');
+	});
 
 });

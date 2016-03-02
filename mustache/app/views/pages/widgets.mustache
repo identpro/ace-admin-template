@@ -1,7 +1,9 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-6 widget-container-col">
+<div class="invisible" id="main-widget-container">
+
+ <div class="row">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-1">
 		<!-- #section:custom/widget-box -->
-		<div class="widget-box">
+		<div class="widget-box" id="widget-box-1">
 			<div class="widget-header">
 				<h5 class="widget-title">Default Widget Box</h5>
 				<!-- #section:custom/widget-box.toolbar -->
@@ -37,8 +39,8 @@
 		<!-- /section:custom/widget-box -->
 	</div>
 	
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-blue">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-2">
+		<div class="widget-box widget-color-blue" id="widget-box-2">
 			<!-- #section:custom/widget-box.options -->
 			<div class="widget-header">
 				<h5 class="widget-title bigger lighter"><i class="ace-icon fa fa-table"></i> Tables & Colors</h5>
@@ -94,8 +96,8 @@
 
 
 <div class="row">
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-orange collapsed">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-3">
+		<div class="widget-box widget-color-orange collapsed" id="widget-box-3">
 			<!-- #section:custom/widget-box.options.collapsed -->
 			<div class="widget-header widget-header-small">
 				<h6 class="widget-title"><i class="ace-icon fa fa-sort"></i> Small Header & Collapsed</h6>
@@ -120,8 +122,8 @@
 		</div>
 	</div>
 	
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-4">
+		<div class="widget-box" id="widget-box-4">
 			<!-- #section:custom/widget-box.header.options -->
 			<div class="widget-header widget-header-large">
 				<h4 class="widget-title">Big Header</h4>
@@ -150,8 +152,8 @@
 
 
 <div class="row">
-	<div class="col-xs-12 col-sm-3 widget-container-col">
-		<div class="widget-box">
+	<div class="col-xs-12 col-sm-3 widget-container-col" id="widget-container-col-5">
+		<div class="widget-box" id="widget-box-5">
 			<div class="widget-header">
 				<h5 class="widget-title smaller">With Label</h5>
 				<div class="widget-toolbar">
@@ -168,8 +170,8 @@
 		</div>
 	</div>
 	
-	<div class="col-xs-12 col-sm-3 widget-container-col">
-		<div class="widget-box widget-color-dark light-border">
+	<div class="col-xs-12 col-sm-3 widget-container-col" id="widget-container-col-6">
+		<div class="widget-box widget-color-dark light-border" id="widget-box-6">
 			<div class="widget-header">
 				<h5 class="widget-title smaller">With Badge</h5>
 				<div class="widget-toolbar">
@@ -186,8 +188,8 @@
 		</div>
 	</div>
 	
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-dark">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-7">
+		<div class="widget-box widget-color-dark" id="widget-box-7">
 			<div class="widget-header widget-header-small">
 				<h6 class="widget-title smaller">With Labels & Badges</h6>
 				<div class="widget-toolbar no-border">
@@ -216,12 +218,18 @@
 
 
 <div class="row">
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-dark">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-8">
+		<div class="widget-box widget-color-dark" id="widget-box-8">
 			<div class="widget-header">
-				<h5 class="widget-title bigger lighter">Box with Toolbox</h5>
+				<h5 class="widget-title bigger lighter">With Toolbox</h5>
+				
 				<div class="widget-toolbar">
-					<div class="progress progress-mini progress-striped active" style="width:100px;" data-percent="61%">
+					<label>
+						<input type="checkbox" class="ace ace-checkbox-2" id="id-checkbox-vertical"><span class="lbl middle padding-4"> Vertical</span>
+					</label>
+				</div>
+				<div class="widget-toolbar">
+					<div class="progress progress-mini progress-striped active pos-rel" style="width:60px;" data-percent="61%">
 						<div class="progress-bar progress-bar-danger" style="width:61%"></div>
 					</div>
 				</div>
@@ -229,7 +237,7 @@
 		
 			<div class="widget-body">
 				<!-- #section:custom/widget-box.toolbox -->
-				<div class="widget-toolbox">
+				<div class="widget-toolbox" id="widget-toolbox-1">
 					<div class="btn-toolbar">
 						<div class="btn-group">
 							<button class="btn btn-sm btn-success btn-white btn-round">
@@ -275,8 +283,8 @@
 		</div>
 	</div>
 	
-	<div class="col-xs-12 col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-pink">
+	<div class="col-xs-12 col-sm-6 widget-container-col" id="widget-container-col-9">
+		<div class="widget-box widget-color-pink" id="widget-box-9">
 			<div class="widget-header">
 				<h5 class="widget-title">Bottom Toolbox (Footer)</h5>
 				<div class="widget-toolbar">
@@ -327,8 +335,8 @@
 
 
 <div class="row">
-	<div class="col-sm-6 widget-container-col">
-		<div class="widget-box">
+	<div class="col-sm-6 widget-container-col" id="widget-container-col-10">
+		<div class="widget-box" id="widget-box-10">
 			<div class="widget-header widget-header-small">
 				<h5 class="widget-title smaller">Tabbed</h5>
 				<!-- #section:custom/widget-box.tabbed -->
@@ -359,21 +367,21 @@
 		</div>
 	</div>
 	
-	<div class="col-sm-6 widget-container-col">
-		<div class="widget-box widget-color-dark">
-			<div class="widget-header widget-hea1der-small">
+	<div class="col-sm-6 widget-container-col" id="widget-container-col-11">
+		<div class="widget-box widget-color-dark" id="widget-box-11">
+			<div class="widget-header">
 				<h6 class="widget-title">Scroll Content</h6>
 				<div class="widget-toolbar">
 					<a href="#" data-action="settings"><i class="ace-icon fa fa-cog"></i></a>
 					<a href="#" data-action="reload"><i class="ace-icon fa fa-refresh"></i></a>
 					<a href="#" data-action="collapse"><i class="ace-icon fa fa-chevron-up"></i></a>
 					<a href="#" data-action="close"><i class="ace-icon fa fa-times"></i></a>
+					<a href="#" data-action="fullscreen" class="orange2"><i class="ace-icon fa fa-expand"></i></a>
 				</div>
 			</div>
 			<div class="widget-body">
-			 <div class="widget-main padding-4">
-				<!-- #section:custom/scrollbar -->
-				<div class="scrollable" data-height="125">
+			<!-- #section:custom/scrollbar -->
+			 <div class="widget-main padding-4 scrollable" data-size="125">
 					<div class="content">
 						<div class="alert alert-info">
 							Lorem ipsum dolor sit amet, consectetur adipiscing.
@@ -387,10 +395,81 @@
 						<div class="alert">
 							Lorem ipsum dolor sit amet, consectetur adipiscing.
 						</div>
-					</div>
-				</div>
-				<!-- /section:custom/scrollbar -->
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-danger">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-danger">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-danger">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-danger">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-danger">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-success">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+						<div class="alert alert-info">
+							Lorem ipsum dolor sit amet, consectetur adipiscing.
+						</div>
+					</div>				
 			 </div>
+			 <!-- /section:custom/scrollbar -->
 			</div>
 		</div>
 	</div>
@@ -403,9 +482,9 @@
 
 
 <div class="row">
-	<div class="col-sm-6 widget-container-col">
+	<div class="col-sm-6 widget-container-col" id="widget-container-col-12">
 		<!-- #section:custom/widget-box.options.transparent -->
-		<div class="widget-box transparent">
+		<div class="widget-box transparent" id="widget-box-12">
 			<div class="widget-header">
 				<h4 class="widget-title lighter">Transparent Box</h4>
 				<div class="widget-toolbar no-border">
@@ -424,8 +503,8 @@
 		<!-- /section:custom/widget-box.options.transparent -->
 	</div>
 
-	<div class="col-sm-6 widget-container-col">
-		<div class="widget-box transparent">
+	<div class="col-sm-6 widget-container-col" id="widget-container-col-13">
+		<div class="widget-box transparent" id="widget-box-13">
 			<div class="widget-header">
 				<h4 class="widget-title lighter">Tabs With Scroll</h4>
 				<div class="widget-toolbar no-border">
@@ -441,7 +520,7 @@
 				<div class="tab-content padding-4">
 				  <div id="home2" class="tab-pane in active">
 					<!-- #section:custom/scrollbar.horizontal -->
-					<div class="scrollable-horizontal" data-width="800">
+					<div class="scrollable-horizontal" data-size="800">
 						<b>Horizontal Scroll</b>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
@@ -451,7 +530,7 @@
 				  </div>
 				  
 				  <div id="profile2" class="tab-pane">
-					<div class="scrollable" data-height="100" data-position="left">
+					<div class="scrollable" data-size="100" data-position="left">
 						<b>Scroll on Left</b>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
@@ -460,7 +539,7 @@
 				  </div>
 				  
 				  <div id="info2" class="tab-pane">
-					<div class="scrollable" data-height="100">
+					<div class="scrollable" data-size="100">
 						<b>Scroll # 3</b>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
@@ -473,4 +552,11 @@
 			</div>
 		</div>
 	</div>
+ </div>
+ 
+ <hr />
+ <div class="text-center">
+	<button type="reset" id="reset-widgets" class="btn btn-danger btn-white btn-bold btn-round">Reset Position/State</button>
+ </div>
+
 </div>

@@ -5,12 +5,14 @@
 	  "submenu" :
 	  [
 	   { "link" : null , "title" : "Layouts" ,
-		  "submenu" : 
+		  "submenu" :
 		  [
 			{ "link" : "top-menu" , "title" : "Top Menu" , "icon" : "fa fa-caret-right" } ,
+			{ "link" : "two-menu-1" , "title" : "Two Menus 1" , "icon" : "fa fa-caret-right" } ,
+			{ "link" : "two-menu-2" , "title" : "Two Menus 2" , "icon" : "fa fa-caret-right" } ,
 			{ "link" : "mobile-menu-1" , "title" : "Default Mobile Menu" , "icon" : "fa fa-caret-right" } ,
 			{ "link" : "mobile-menu-2" , "title" : "Mobile Menu 2" , "icon" : "fa fa-caret-right" } ,
-			{ "link" : "mobile-menu-3" , "title" : "Mobile Menu 3" , "icon" : "fa fa-caret-right" }
+			{ "link" : "mobile-menu-3" , "title" : "Mobile Menu 3" , "icon" : "fa fa-caret-right" } 
 		  ]
 		} ,
 		
@@ -19,6 +21,8 @@
 		{ "link" : "elements" , "title" : "Elements" } ,
 
 		{ "link" : "buttons" , "title" : "Buttons & Icons" } ,
+		
+		{ "link" : "content-slider", "title" : "Content Sliders" } ,
 
 		{ "link" : "treeview" , "title" : "Treeview" } ,
 		
@@ -29,19 +33,19 @@
 		{ "link" : null , "title" : "Three Level Menu" ,
 		  "submenu" : 
 		  [
-			{ "link" : null , "title" : "Item #1" , "icon" : "fa fa-leaf" } ,
-			{ "link" : null , "title" : "4th level" , "icon" : "fa fa-pencil" ,
+			{ "link" : null , "title" : "Item #1" , "icon" : "fa fa-leaf green" } ,
+			{ "link" : null , "title" : "4th level" , "icon" : "fa fa-pencil orange" ,
 				"submenu" : 
 				  [
-					{ "link" : null , "title" : "Add Product" , "icon" : "fa fa-plus" } ,
-					{ "link" : null , "title" : "View Products" , "icon" : "fa fa-eye" }
+					{ "link" : null , "title" : "Add Product" , "icon" : "fa fa-plus purple" } ,
+					{ "link" : null , "title" : "View Products" , "icon" : "fa fa-eye pink" }
 				  ]
 			}
 		  ]
 		}
 	  ]
 	 } ,
-
+	 
 	 {
 	  "link" : null , "title" : "Tables" , "icon" : "fa fa-list",
 	  "submenu" :
@@ -56,6 +60,7 @@
 	  "submenu" :
 	  [
 		{ "link" : "form-elements" , "title" : "Form Elements" } ,
+		{ "link" : "form-elements-2" , "title" : "Form Elements 2" } ,
 		{ "link" : "form-wizard" , "title" : "Wizard & Validation" },
 		{ "link" : "wysiwyg" , "title" : "Wysiwyg & Markdown" },
 		{ "link" : "dropzone" , "title" : "Dropzone File Upload" }
@@ -81,6 +86,10 @@
 		{ "link" : "invoice" , "title" : "Invoice" } ,
 		
 		{ "link" : "timeline" , "title" : "Timeline" } ,
+		
+		{ "link" : "search" , "title" : "Search Results" } ,
+		
+		{ "link" : "email" , "title" : "Email Templates" } ,
 
 		{ "link" : "login" , "title" : "Login & Register" }
 	   ]

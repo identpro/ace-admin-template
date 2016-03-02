@@ -4,16 +4,16 @@
 		<meta charset="utf-8" />
 		<title>Treeview Example</title>
 
-		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="../assets/css/font-awesome.css" />
 		
 		<!-- fonts -->
 		<link rel="stylesheet" href="../assets/css/ace-fonts.css" />
 		
 		
-		<link rel="stylesheet" href="../assets/css/ace.min.css" />
+		<link rel="stylesheet" href="../assets/css/ace.css" />
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
 		<![endif]-->
 	</head>
 
@@ -82,78 +82,76 @@
 		<!-- basic scripts -->
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
+		 window.jQuery || document.write("<script src='../assets/js/jquery.js'>"+"<"+"/script>");
 		</script>
 		<!-- <![endif]-->
 		<!--[if IE]>
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		 window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.js'>"+"<"+"/script>");
 		</script>
 		<![endif]-->
 		
-		<script src="../assets/js/bootstrap.min.js"></script>
+		<script src="../assets/js/bootstrap.js"></script>
 		
-		<script src="../assets/js/fuelux/fuelux.tree.min.js"></script>
+		<script src="../assets/js/fuelux/fuelux.tree.js"></script>
 		
 		<!-- ace scripts -->
-		<script src="../assets/js/ace.min.js"></script>
-		<script src="../assets/js/ace-elements.min.js"></script>
+		<script src="../assets/js/ace-elements.js"></script>
+		<script src="../assets/js/ace.js"></script>
 		
 		<script type="text/javascript">
 			$(function() {
 				//construct the data source object to be used by tree
-				function DataSourceTree(options) {
-					this.url = options.url;
-					
-					this.data = function(options, callback) {
-						var parent_id = null
-						if( !('name' in options || 'type' in options) ){
-							parent_id = 0;//load first level data
-						}
-						else if('type' in options && options['type'] == 'folder') {//it has children
-							if('additionalParameters' in options && 'children' in options.additionalParameters)
-								parent_id = options.additionalParameters['id']
-						}
-						
-						if(parent_id !== null) {
-							$.ajax({
-								url: this.url,
-								data: 'id='+parent_id,
-								type: 'POST',
-								dataType: 'json',
-								success : function(response) {
-									if(response.status == "OK")
-										callback({ data: response.data })
-								},
-								error: function(response) {
-									//console.log(response);
-								}
-							})
-						}
+				var remoteUrl = 'treeview.php';
+				
+				var remoteDateSource = function(options, callback) {
+					var parent_id = null
+					if( !('text' in options || 'type' in options) ){
+						parent_id = 0;//load first level data
 					}
-				};
+					else if('type' in options && options['type'] == 'folder') {//it has children
+						if('additionalParameters' in options && 'children' in options.additionalParameters)
+							parent_id = options.additionalParameters['id']
+					}
+					
+					if(parent_id !== null) {
+						$.ajax({
+							url: remoteUrl,
+							data: 'id='+parent_id,
+							type: 'POST',
+							dataType: 'json',
+							success : function(response) {
+								if(response.status == "OK")
+									callback({ data: response.data })
+							},
+							error: function(response) {
+								//console.log(response);
+							}
+						})
+					}
+				}
 
 				$('#treeview').ace_tree({
-					dataSource: new DataSourceTree({url: 'treeview.php'}) ,
+					dataSource: remoteDateSource ,
 					multiSelect: true,
 					loadingHTML: '<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
-					'open-icon' : 'tree-minus',
-					'close-icon' : 'tree-plus',
+					'open-icon' : 'ace-icon tree-minus',
+					'close-icon' : 'ace-icon tree-plus',
 					'selectable' : true,
 					'selected-icon' : 'ace-icon fa fa-check',
-					'unselected-icon' : 'ace-icon fa fa-times'
+					'unselected-icon' : 'ace-icon fa fa-times',
+					cacheItems: true,
+					folderSelect: false
 				});
 				
 				
 				//show selected items inside a modal
 				$('#submit-button').on('click', function() {
-					var tree = $('#treeview').data('tree');
-					
 					var output = '';
-					var items = tree.selectedItems();
+					var items = $('#treeview').tree('selectedItems');
 					for(var i in items) if (items.hasOwnProperty(i)) {
 						var item = items[i];
-						output += item.additionalParameters['id'] + ":"+ item.name+"\n";
+						output += item.additionalParameters['id'] + ":"+ item.text+"\n";
 					}
 					
 					$('#modal-tree-items').modal('show');
