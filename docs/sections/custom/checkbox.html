@@ -211,6 +211,33 @@ input[type=checkbox].ace.ace-switch.ace-switch-4:checked + .lbl::before {
  </label>
 </pre>
 			</li>
+			
+			<li>
+				It also seems that Rails framework automatically puts a hidden input before the checkbox.
+				<br />
+				In some browsers, this may prevent the checkbox from receiving click events if it's inside a label:
+<pre data-language="html">
+ <label>
+   <input type="hidden" name="rails-inserted-hidden-input" />
+   <input type="checkbox" name="myoption" class="ace" />
+   <span class="lbl"></span>
+ </label>
+</pre>
+
+				That's because <code>label</code> element should only have one input element which
+				in this is the "hidden" input.
+				
+				<br />
+				To fix that you can put "hidden" input after checkbox or associate the label to checkbox with
+				"for" attribute and checkbox "id":
+<pre data-language="html">
+ <label for="myoption">
+   <input type="hidden" name="rails-inserted-hidden-input" />
+   <input id="myoption" type="checkbox" name="myoption" class="ace" />
+   <span class="lbl"></span>
+ </label>
+</pre>
+			</li>
 
 			<li>
 				Sometimes you have a list of checkboxes inside a parent with scrollbars.
@@ -288,6 +315,38 @@ input[type=checkbox].ace.ace-switch.ace-switch-4:checked + .lbl::before {
  		 </ul>
 		</div>
 		<!-- /section:custom/checkbox.notes -->
+		
+		<h3 class="info-title smaller">4. Options</h3>
+		<div class="info-section">
+		 <ul class="info-list list-unstyled">
+			<li>
+				For a slightly larger version of checkbox and radio buttons, you can add <code>.input-lg</code>
+				class to the input element:
+<pre data-language="html">
+ <label>
+  <input type="checkbox" name="myoption" class="ace input-lg" />
+  <span class="lbl"></span>
+ </label>
+</pre>
+			</li>
+		 
+			<li>To add space between checkbox and its label you can use <code>.padding-*</code> class for <code>.lbl</code> element:
+			<div class="well well-sm">
+				<label>
+				  <input type="checkbox" name="myoption" class="ace" />
+				  <span class="lbl padding-16">Padding 16</span>
+				</label>
+			</div>
+<pre data-language="html">
+ <label>
+  <input type="checkbox" name="myoption" class="ace" />
+  <span class="lbl padding-8"></span>
+ </label>
+</pre>
+			Possible values are <code>.padding-2</code> <code>.padding-4</code> ... <code>.padding-16</code>
+			</li>
+		 </ul>
+		</div>
 
 		
 	</div>

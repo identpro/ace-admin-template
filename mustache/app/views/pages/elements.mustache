@@ -2,10 +2,11 @@
 
  <div class="col-sm-6">
 	<!-- #section:elements.tab -->
+
 	<div class="tabbable">
             <ul class="nav nav-tabs" id="myTab">
               <li class="active"><a data-toggle="tab" href="#home"><i class="green ace-icon fa fa-home bigger-120"></i> Home</a></li>
-              <li><a data-toggle="tab" href="#profile">Messages <span class="badge badge-danger">4</span></a></li>
+              <li><a data-toggle="tab" href="#messages">Messages <span class="badge badge-danger">4</span></a></li>
               <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					Dropdown &nbsp;<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
@@ -17,16 +18,16 @@
               </li>
             </ul>
             <div class="tab-content">
-			  <div id="home" class="tab-pane in active">
+			  <div id="home" class="tab-pane fade in active">
 				<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
 			  </div>
-			  <div id="profile" class="tab-pane">
+			  <div id="messages" class="tab-pane fade">
 				<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
 			  </div>
-			  <div id="dropdown1" class="tab-pane">
+			  <div id="dropdown1" class="tab-pane fade">
 				<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
 			  </div>
-			  <div id="dropdown2" class="tab-pane">
+			  <div id="dropdown2" class="tab-pane fade">
 				<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.</p>
 			  </div>
             </div>
@@ -205,11 +206,11 @@
 		<div class="row">
 		<div class="col-xs-8">
 			<!-- #section:elements.progressbar -->
-			<div class="progress" data-percent="66%">
+			<div class="progress pos-rel" data-percent="66%">
 				<div class="progress-bar" style="width:66%;"></div>
 			</div>
 
-			<div class="progress progress-striped" data-percent="25%">
+			<div class="progress progress-striped pos-rel">
 				<div class="progress-bar progress-bar-success" style="width: 25%;"></div>
 			</div>
 			<!-- /section:elements.progressbar -->
@@ -534,7 +535,7 @@
 						<span class="pull-left">More options</span>
 						<i class="ace-icon fa fa-caret-right pull-right"></i>
 					</a>
-					<ul class="dropdown-menu pull-left">
+					<ul class="dropdown-menu dropdown-light">
 						<li><a href="#" tabindex="-1">Second level link</a></li>
 						<li><a href="#" tabindex="-1">Second level link</a></li>
 						<li><a href="#" tabindex="-1">Second level link</a></li>
@@ -556,7 +557,7 @@
 						<span class="pull-left">More options</span>
 						<i class="ace-icon fa fa-caret-left pull-right"></i>
 					</a>
-					<ul class="dropdown-menu dropdown-menu-right">
+					<ul class="dropdown-menu dropdown-purple dropdown-menu-right">
 						<li><a href="#" tabindex="-1">Second level link</a></li>
 						<li><a href="#" tabindex="-1">Second level link</a></li>
 						<li><a href="#" tabindex="-1">Second level link</a></li>
@@ -590,7 +591,7 @@
 			<span class="col-sm-5">
 				<label class="pull-right inline">
 					<small class="muted">Stacked:</small>
-					<input id="id-pills-stacked" checked type="checkbox" class="ace ace-switch ace-switch-5" />
+					<input id="id-pills-stacked" type="checkbox" class="ace ace-switch ace-switch-5" />
 					<span class="lbl middle"></span>
 				</label>
 			</span><!-- /.col -->
@@ -604,10 +605,4 @@
 
 	</div>
 </div>
-
-
-<script type="text/javascript">
-var $path_assets = "{{{path.assets}}}";//this will be used in gritter alerts containing images
-</script>
-
 

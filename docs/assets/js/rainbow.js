@@ -292,7 +292,10 @@ window['Rainbow'] = (function() {
 
                 // every 100 items we process let's call set timeout
                 // to let the ui breathe a little
-                return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
+				//return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
+				//ACE
+				//the timeout brings up errors when multiple blocks are being highlighted quickly one after one
+				return nextCall();
             };
 
         // if this is not a child match and it falls inside of another
@@ -562,7 +565,10 @@ window['Rainbow'] = (function() {
                 };
 
                 // use a timeout every 250 to not freeze up the UI
-                return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
+				//return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
+				//ACE
+				//the timeout brings up errors when multiple blocks are being highlighted quickly one after one
+				return next()
             }
 
             onComplete(code);

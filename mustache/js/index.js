@@ -1,11 +1,20 @@
 var arg = require('argh').argv; //read & parse arguements
-var engine_name = ('engine' in arg && arg['engine'] == "mustache") ? "mustache" : "hogan";//hogan or mustache
-var engine = require(engine_name == "hogan" ? "hogan.js" : "mustache")
+var engine_name = "hogan";//('engine' in arg && arg['engine'] == "mustache") ? "mustache" : "hogan";//hogan or mustache
+var engine = require("hogan.js")//require(engine_name == "hogan" ? "hogan.js" : "mustache")
   , fs    = require('fs')
   , extend= require('xtend')
   , AutoLoader = require('./classes/autoload-'+engine_name+'.js');
 
 var output_folder = 'output_folder' in arg ? arg['output_folder'] : 'output'
+
+var path_parts = output_folder.split(/[\\\/]/g);
+var new_folder = '';
+for(var p in path_parts) {
+  var tmp = path_parts[p].replace(/^\s+/g, '').replace(/\s+$/g, '');
+  new_folder = new_folder + tmp + "/";
+  if( !fs.existsSync(__dirname+'/'+new_folder) ) fs.mkdir(__dirname+'/'+new_folder);
+}
+
 
 var compressor;
 try {
@@ -20,8 +29,10 @@ var path =
  views : __dirname + '/../app/views',
  base : '..',
  assets : '../assets',
- images : '../assets/images'
+ images : '../assets/images',
+ minified: ''
 }
+
 for(var p in path) {
 	if ('path_'+p in arg) path[p] = arg['path_'+p]
 }
@@ -47,6 +58,7 @@ var autoload = new AutoLoader(engine , path);
 if(site['development'] == true) {
  site['ace_scripts'] = [];
  var scripts = JSON.parse(fs.readFileSync(__dirname + '/../../assets/js/ace/scripts.json' , 'utf-8'));
+ if(site['ajax'] == true) scripts['ace.ajax-content.js'] = true;
  for(var name in scripts)
    if(scripts.hasOwnProperty(name) && scripts[name] == true) {
 	 site['ace_scripts'].push(name);
@@ -84,14 +96,16 @@ function generate(page_name) {
 
 		var context = { "page":page.get_vars() , "layout":layout.get_vars(), "path" : path , "site" : site }
 		context['breadcrumbs'] = sidenav.get_breadcrumbs();
-		context['createLinkFunction'] = function(value) {
-			return value+'.html';
+		context['createLinkFunction'] = function() {
+			return function(text) {
+				return text+'.html';
+			}
 		}
 
 		autoload.set_params(page.get_name() , layout_name);
 
-		var rendered_output = engine_name == "hogan" ? layout.get_template().render(context) : (layout.get_template())(context)
-		Indentation(rendered_output , site['onpage_help'], function(result) {
+		var rendered_output = layout.get_template().render(context);//engine_name == "hogan" ? layout.get_template().render(context) : (layout.get_template())(context)
+		Indentation(rendered_output , site['onpage_help'], false, function(result) {
 			var output_file = output_folder+'/'+page_name+'.html';
 			fs.writeFileSync( __dirname + '/'+output_file , result, 'utf-8' );
 			console.log(output_file);

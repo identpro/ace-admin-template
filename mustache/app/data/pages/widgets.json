@@ -1,7 +1,9 @@
 {
  "title" : "Widgets"
  ,
- "description" : "Draggabble Widget Boxes & Containers"
+ "description" : "Draggabble Widget Boxes with Persistent Position and State"
  ,
- "scripts" : ["jquery-ui" , "slimscroll"]
+ "styles" : ["jquery-ui"]
+ ,
+ "scripts" : ["jquery-ui"]
 }

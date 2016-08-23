@@ -8,6 +8,6 @@ jQuery(function($) {
 	});
 
 	$('#id-button-borders').attr('checked' , 'checked').on('click', function(){
-			$('#default-buttons .btn').toggleClass('no-border');
+		$('#default-buttons .btn').toggleClass('no-border');
 	});
 })

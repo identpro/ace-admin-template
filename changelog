@@ -1,3 +1,34 @@
+v1.3.5
+ * New:
+	Search results page
+	Landing page
+	Coming soon page
+	RequireJS example
+	Example for persistent (restorable) widgets
+	
+ * Enhancements:
+	Updated and improved saving/restoring of element states
+	New options for sidebars
+	New options for ajax
+
+ * Fixes:
+	A few fixes and improvements
+
+ * Updates:
+	Updated all plugins and scripts to their latest version
+
+v1.3.4
+ * Enhancements:
+	New methods and events for ajax
+	New file input element option and event
+	Native scrollbars for fixed sidebar on touch devices (only for second style)
+
+ * Fixes:
+	Selectable folders for treeview element
+
+ * Updates:
+	Updated all plugins and scripts to their latest version
+
 v1.3.3
  * New:
 	TableTools and ColVis extensions for DataTables

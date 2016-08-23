@@ -17,8 +17,8 @@
 
 <!-- ace scripts -->
 {{^site.development}}{{! in production mode use ace-elements.js and ace.js script file }}
- <script src="{{{path.assets}}}/js/ace-elements.min.js"></script>
- <script src="{{{path.assets}}}/js/ace.min.js"></script>
+ <script src="{{{path.assets}}}/js/ace-elements{{{path.minified}}}.js"></script>
+ <script src="{{{path.assets}}}/js/ace{{{path.minified}}}.js"></script>
 {{/site.development}}
 
 {{#site.development}}{{! in development mode use separate script files }}
@@ -37,10 +37,12 @@
 
 
 {{#site.onpage_help}}{{! enable on page help }}
+  <!-- the following scripts are used in demo only for onpage help and you don't need them -->
   <link rel="stylesheet" href="{{{path.assets}}}/css/ace.onpage-help.css" />
   <link rel="stylesheet" href="{{{path.base}}}/docs/assets/js/themes/sunburst.css" />
 
   <script type="text/javascript">ace.vars['base'] = '{{{path.base}}}';</script>
+  <script src="{{{path.assets}}}/js/ace/elements.onpage-help.js"></script>
   <script src="{{{path.assets}}}/js/ace/ace.onpage-help.js"></script>
   <script src="{{{path.base}}}/docs/assets/js/rainbow.js"></script>
   <script src="{{{path.base}}}/docs/assets/js/language/generic.js"></script>

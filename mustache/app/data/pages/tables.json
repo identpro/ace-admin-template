@@ -3,5 +3,5 @@
  ,
  "description" : "Static & Dynamic Tables"
  ,
- "scripts" : ["dataTables"]
+ "scripts" : ["dataTables", "dataTables-extensions"]
 }

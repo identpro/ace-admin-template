@@ -1,5 +1,18 @@
 jQuery(function($){
 	
+	$('textarea[data-provide="markdown"]').each(function(){
+        var $this = $(this);
+
+		if ($this.data('markdown')) {
+		  $this.data('markdown').showEditor();
+		}
+		else $this.markdown()
+		
+		$this.parent().find('.btn').addClass('btn-white');
+    })
+	
+	
+	
 	function showErrorAlert (reason, detail) {
 		var msg='';
 		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
@@ -156,7 +169,8 @@ jQuery(function($){
 		//or we can load the jQuery UI dynamically only if needed
 		if (typeof jQuery.ui !== 'undefined') enableImageResize();
 		else {//load jQuery UI if not loaded
-			$.getScript($path_assets+"/js/jquery-ui.custom.min.js", function(data, textStatus, jqxhr) {
+			//in Ace demo {{{path.assets}}} will be replaced by correct assets path
+			$.getScript("{{{path.assets}}}/js/jquery-ui.custom.min.js", function(data, textStatus, jqxhr) {
 				enableImageResize()
 			});
 		}

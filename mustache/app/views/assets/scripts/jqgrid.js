@@ -41,17 +41,39 @@ jQuery(function($) {
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
 	
+	
+	var parent_column = $(grid_selector).closest('[class*="col-"]');
 	//resize to fit page size
 	$(window).on('resize.jqGrid', function () {
-		$(grid_selector).jqGrid( 'setGridWidth', $(".page-content").width() );
+		$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
     })
+	
 	//resize on sidebar collapse/expand
-	var parent_column = $(grid_selector).closest('[class*="col-"]');
 	$(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
 		if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
-			$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+			//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+			setTimeout(function() {
+				$(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+			}, 20);
 		}
     })
+	
+	//if your grid is inside another element, for example a tab pane, you should use its parent's width:
+	/**
+	$(window).on('resize.jqGrid', function () {
+		var parent_width = $(grid_selector).closest('.tab-pane').width();
+		$(grid_selector).jqGrid( 'setGridWidth', parent_width );
+	})
+	//and also set width when tab pane becomes visible
+	$('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+	  if($(e.target).attr('href') == '#mygrid') {
+		var parent_width = $(grid_selector).closest('.tab-pane').width();
+		$(grid_selector).jqGrid( 'setGridWidth', parent_width );
+	  }
+	})
+	*/
+	
+	
 
 
 
@@ -94,6 +116,7 @@ jQuery(function($) {
 				formatter:'actions', 
 				formatoptions:{ 
 					keys:true,
+					//delbutton: false,//disable delete button
 					
 					delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
 					//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
@@ -227,7 +250,7 @@ jQuery(function($) {
 				form.data('styled', true);
 			},
 			onClick : function(e) {
-				alert(1);
+				//alert(1);
 			}
 		},
 		{
@@ -263,11 +286,12 @@ jQuery(function($) {
 	function style_edit_form(form) {
 		//enable datepicker on "sdate" field and switches for "stock" field
 		form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
-			.end().find('input[name=stock]')
-				.addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+		
+		form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 				   //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
 				  //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
+				
 		//update buttons classes
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
@@ -379,5 +403,8 @@ jQuery(function($) {
 
 	//var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
-
+	$(document).one('ajaxloadstart.page', function(e) {
+		$.jgrid.gridDestroy(grid_selector);
+		$('.ui-jqdialog').remove();
+	});
 });

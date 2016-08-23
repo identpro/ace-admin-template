@@ -24,5 +24,10 @@ jQuery(function($) {
 	};
 
 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-	$("#cboxLoadingGraphic").append("<i class='ace-icon fa fa-spinner orange'></i>");//let's add a custom loading icon
+	$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		$('#colorbox, #cboxOverlay').remove();
+   });
 })

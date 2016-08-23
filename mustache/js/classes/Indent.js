@@ -8,12 +8,12 @@
 var htmlparser = require("htmlparser2")
 var keep_help = false;
 
-module.exports = function(html_input , keep_help_comments, callback) {
+module.exports = function(html_input , keep_help_comments, is_ajax_content, callback) {
 	keep_help = keep_help_comments || false;
 	var handler = new htmlparser.DomHandler(function (error, dom) {
 		if (error) { }
 		else {
-			var result = "<!DOCTYPE html>"+pretty_print(dom , 0);
+			var result = (!is_ajax_content ? "<!DOCTYPE html>" : "")+pretty_print(dom , 0);
 			callback.call(null, result)
 		}
 	});
@@ -78,7 +78,11 @@ function pretty_print(dom , level) {
 
 		if("attribs" in e) {
 			for(var name in e.attribs) if(e.attribs.hasOwnProperty(name)) {
-				output += " "+name+'="'+(trim(e.attribs[name]).replace(/\s/g, ' '))+'"';
+				var attribWrap = '"';
+				if(e.attribs[name].indexOf('"') >= 0) {
+					attribWrap = "'";//if attribute value contains " then use ' to wrap it
+				}
+				output += " "+name+"="+attribWrap+(trim(e.attribs[name]).replace(/\s/g, ' '))+attribWrap;
 			}
 		}
 

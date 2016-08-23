@@ -2,23 +2,26 @@ jQuery(function($) {
 
 	$('[data-rel=tooltip]').tooltip();
 
-	$(".select2").css('width','200px').select2({allowClear:true})
+	$('.select2').css('width','200px').select2({allowClear:true})
 	.on('change', function(){
 		$(this).closest('form').validate().element($(this));
 	}); 
 
 
 	var $validation = false;
-	$('#fuelux-wizard')
+	$('#fuelux-wizard-container')
 	.ace_wizard({
 		//step: 2 //optional argument. wizard will jump to step "2" at first
+		//buttons: '.wizard-actions:eq(0)'
 	})
-	.on('change' , function(e, info){
+	.on('actionclicked.fu.wizard' , function(e, info){
 		if(info.step == 1 && $validation) {
-			if(!$('#validation-form').valid()) return false;
+			if(!$('#validation-form').valid()) e.preventDefault();
 		}
 	})
-	.on('finished', function(e) {
+	//.on('changed.fu.wizard', function() {
+	//})
+	.on('finished.fu.wizard', function(e) {
 		bootbox.dialog({
 			message: "Thank you! Your information was successfully saved!", 
 			buttons: {
@@ -28,17 +31,18 @@ jQuery(function($) {
 				}
 			}
 		});
-	}).on('stepclick', function(e){
+	}).on('stepclick.fu.wizard', function(e){
 		//e.preventDefault();//this will prevent clicking and selecting steps
 	});
 
 
 	//jump to a step
-	$('#step-jump').on('click', function() {
-		var wizard = $('#fuelux-wizard').data('wizard')
-		wizard.currentStep = 3;
-		wizard.setState();
-	})
+	/**
+	var wizard = $('#fuelux-wizard-container').data('fu.wizard')
+	wizard.currentStep = 3;
+	wizard.setState();
+	*/
+
 	//determine selected step
 	//wizard.selectedItem().step
 
@@ -74,6 +78,7 @@ jQuery(function($) {
 		errorElement: 'div',
 		errorClass: 'help-block',
 		focusInvalid: false,
+		ignore: "",
 		rules: {
 			email: {
 				required: true,
@@ -102,10 +107,6 @@ jQuery(function($) {
 			comment: {
 				required: true
 			},
-			date: {
-				required: true,
-				date: true
-			},
 			state: {
 				required: true
 			},
@@ -115,8 +116,12 @@ jQuery(function($) {
 			subscription: {
 				required: true
 			},
-			gender: 'required',
-			agree: 'required'
+			gender: {
+				required: true,
+			},
+			agree: {
+				required: true,
+			}
 		},
 
 		messages: {
@@ -128,6 +133,7 @@ jQuery(function($) {
 				required: "Please specify a password.",
 				minlength: "Please specify a secure password."
 			},
+			state: "Please choose state",
 			subscription: "Please choose at least one option",
 			gender: "Please choose gender",
 			agree: "Please accept our policy"
@@ -144,7 +150,7 @@ jQuery(function($) {
 		},
 
 		errorPlacement: function (error, element) {
-			if(element.is(':checkbox') || element.is(':radio')) {
+			if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
 				var controls = element.closest('div[class*="col-"]');
 				if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
 				else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
@@ -167,7 +173,7 @@ jQuery(function($) {
 	
 	
 	
-	$('#modal-wizard .modal-header').ace_wizard();
+	$('#modal-wizard-container').ace_wizard();
 	$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
 	
 	
@@ -180,4 +186,10 @@ jQuery(function($) {
 		$(this).closest('form').validate().element($(this));
 	});
 	*/
+	
+	
+	$(document).one('ajaxloadstart.page', function(e) {
+		//in ajax mode, remove remaining elements before leaving page
+		$('[class*=select2]').remove();
+	});
 })

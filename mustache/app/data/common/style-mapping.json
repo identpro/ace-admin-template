@@ -7,7 +7,7 @@
 
  "timepicker" : "bootstrap-timepicker.css",
 
- "datepicker" : "datepicker.css",
+ "datepicker" : "bootstrap-datepicker3.css",
 
  "daterangepicker" : "daterangepicker.css",
  
@@ -17,9 +17,9 @@
 
  "gritter" : "jquery.gritter.css",
 
- "jquery-ui" : "jquery-ui.custom.min.css",
+ "jquery-ui" : "jquery-ui.custom.css",
  
- "jquery-ui-full" : "jquery-ui.min.css",
+ "jquery-ui-full" : "jquery-ui.css",
  
  "jqgrid" : "ui.jqgrid.css",
 
@@ -29,5 +29,9 @@
 
  "select2" : "select2.css",
  
- "dropzone" : "dropzone.css"
+ "dropzone" : "dropzone.css",
+ 
+ "duallistbox": "bootstrap-duallistbox.css",
+ 
+ "multiselect": "bootstrap-multiselect.css"
 }

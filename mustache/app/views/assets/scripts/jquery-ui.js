@@ -46,14 +46,14 @@ jQuery(function($) {
 			buttons: [ 
 				{
 					text: "Cancel",
-					"class" : "btn btn-xs",
+					"class" : "btn btn-minier",
 					click: function() {
 						$( this ).dialog( "close" ); 
 					} 
 				},
 				{
 					text: "OK",
-					"class" : "btn btn-primary btn-xs",
+					"class" : "btn btn-primary btn-minier",
 					click: function() {
 						$( this ).dialog( "close" ); 
 					} 
@@ -74,13 +74,14 @@ jQuery(function($) {
 	
 		$( "#dialog-confirm" ).removeClass('hide').dialog({
 			resizable: false,
+			width: '320',
 			modal: true,
 			title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> Empty the recycle bin?</h4></div>",
 			title_html: true,
 			buttons: [
 				{
 					html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete all items",
-					"class" : "btn btn-danger btn-xs",
+					"class" : "btn btn-danger btn-minier",
 					click: function() {
 						$( this ).dialog( "close" );
 					}
@@ -88,7 +89,7 @@ jQuery(function($) {
 				,
 				{
 					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancel",
-					"class" : "btn btn-xs",
+					"class" : "btn btn-minier",
 					click: function() {
 						$( this ).dialog( "close" );
 					}
@@ -130,15 +131,23 @@ jQuery(function($) {
 
 	//custom autocomplete (category selection)
 	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+		_create: function() {
+			this._super();
+			this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+		},
 		_renderMenu: function( ul, items ) {
 			var that = this,
 			currentCategory = "";
 			$.each( items, function( index, item ) {
+				var li;
 				if ( item.category != currentCategory ) {
 					ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
 					currentCategory = item.category;
 				}
-				that._renderItemData( ul, item );
+				li = that._renderItemData( ul, item );
+					if ( item.category ) {
+					li.attr( "aria-label", item.category + " : " + item.label );
+				}
 			});
 		}
 	});
@@ -242,5 +251,10 @@ jQuery(function($) {
 				   .children(0).addClass('progress-bar progress-bar-success');
 		}
 	});
+
+	
+	//selectmenu
+	 $( "#number" ).css('width', '200px')
+	.selectmenu({ position: { my : "left bottom", at: "left top" } })
 		
 });

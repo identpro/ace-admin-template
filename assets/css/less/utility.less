@@ -6,6 +6,7 @@
 .center , .align-center{ text-align: center !important; }
 .align-left { text-align: left !important; }
 .align-right { text-align: right !important; }
+.align-justify { text-align: justify; }
 
 .middle { vertical-align: middle; }
 .align-middle { vertical-align: middle !important; }
@@ -49,6 +50,7 @@
 	.biggerX(@index + 10);
 }
 .biggerX(110);
+.bigger-115 { font-size: 115% !important;}
 .bigger-125 { font-size: 125% !important;}
 .bigger-175 { font-size: 175% !important; }
 .bigger-225 { font-size: 225% !important; }
@@ -103,12 +105,12 @@
  .box-shadow(none) !important;
 }
 
-
-.overflow-hidden {overflow: hidden !important;}
 .overflow-auto {overflow: auto !important;}
-.overflow-scroll {overflow: scroll !important;}
 .overflow-visible {overflow: visible !important;}
 */
+
+.overflow-hidden {overflow: hidden !important;}
+.overflow-scroll {overflow-x: hidden !important; overflow-y: scroll !important;}
 
 .no-radius {
  .border-radius(0) !important;
@@ -198,6 +200,11 @@
  padding-bottom: 4px;
  border-bottom: 1px solid #CCC;
  
+ &.less-margin {
+	margin-top: 10px;
+	margin-bottom: 10px;
+ }
+ 
  &.blue {
 	border-bottom-color: desaturate(lighten(@ace-blue, 35%), 10%);
  }
@@ -258,3 +265,5 @@
 	.transform(~"scale(1.2)");
   }
 }
+
+

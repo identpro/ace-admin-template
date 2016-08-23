@@ -34,10 +34,12 @@ jQuery(function($) {
 	var m = date.getMonth();
 	var y = date.getFullYear();
 
-	
+
 	var calendar = $('#calendar').fullCalendar({
 		//isRTL: true,
-		 buttonText: {
+		//firstDay: 1,// >> change first day of week 
+		
+		 buttonHtml: {
 			prev: '<i class="ace-icon fa fa-chevron-left"></i>',
 			next: '<i class="ace-icon fa fa-chevron-right"></i>'
 		},
@@ -55,20 +57,32 @@ jQuery(function($) {
 		  },
 		  {
 			title: 'Long Event',
-			start: new Date(y, m, d-5),
-			end: new Date(y, m, d-2),
+			start: moment().subtract(5, 'days').format('YYYY-MM-DD'),
+			end: moment().subtract(1, 'days').format('YYYY-MM-DD'),
 			className: 'label-success'
 		  },
 		  {
 			title: 'Some Event',
 			start: new Date(y, m, d-3, 16, 0),
-			allDay: false
+			allDay: false,
+			className: 'label-info'
 		  }
 		]
 		,
+		
+		/**eventResize: function(event, delta, revertFunc) {
+
+			alert(event.title + " end is now " + event.end.format());
+
+			if (!confirm("is this okay?")) {
+				revertFunc();
+			}
+
+		},*/
+		
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
-		drop: function(date, allDay) { // this function is called when something is dropped
+		drop: function(date) { // this function is called when something is dropped
 		
 			// retrieve the dropped element's stored Event Object
 			var originalEventObject = $(this).data('eventObject');
@@ -80,7 +94,7 @@ jQuery(function($) {
 			
 			// assign it the date that was reported
 			copiedEventObject.start = date;
-			copiedEventObject.allDay = allDay;
+			copiedEventObject.allDay = false;
 			if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
 			
 			// render the event on the calendar
@@ -106,7 +120,8 @@ jQuery(function($) {
 							title: title,
 							start: start,
 							end: end,
-							allDay: allDay
+							allDay: allDay,
+							className: 'label-info'
 						},
 						true // make the event "stick"
 					);

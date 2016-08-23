@@ -8,21 +8,25 @@
 			<i class="ace-icon fa fa-exclamation-triangle"></i> {{layout.navbar_notifications.count}} Notifications
 		</li>
 
-		{{#layout.navbar_notifications.latest}}
-		<li>
-			<a href="#">
-				{{#badge}}
-				<div class="clearfix">
-					<span class="pull-left"><i class="btn btn-xs no-hover {{icon-class}} {{icon}}"></i> {{title}}</span>
-					<span class="pull-right badge {{badge-class}}">{{badge}}</span>					
-				</div>
-				{{/badge}}
-				{{^badge}}
-					<i class="btn btn-xs {{icon-class}} {{icon}}"></i> {{title}}
-				{{/badge}}
-			</a>
+		<li class="dropdown-content">
+			<ul class="dropdown-menu dropdown-navbar navbar-pink">
+				{{#layout.navbar_notifications.latest}}
+				<li>
+					<a href="#">
+						{{#badge}}
+						<div class="clearfix">
+							<span class="pull-left"><i class="btn btn-xs no-hover {{icon-class}} {{icon}}"></i> {{title}}</span>
+							<span class="pull-right badge {{badge-class}}">{{badge}}</span>					
+						</div>
+						{{/badge}}
+						{{^badge}}
+							<i class="btn btn-xs {{icon-class}} {{icon}}"></i> {{title}}
+						{{/badge}}
+					</a>
+				</li>
+				{{/layout.navbar_notifications.latest}}
+			</ul>
 		</li>
-		{{/layout.navbar_notifications.latest}}
 
 		<li class="dropdown-footer">
 			<a href="#">

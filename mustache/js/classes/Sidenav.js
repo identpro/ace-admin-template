@@ -2,8 +2,9 @@
 var fs = require('fs');
 module.exports = function() {
  var $navList = null;
- var $active_page = '';
+ var $active_page = null;
  var $breadcrumbs = {};
+ var nav_items = {}
 
 
  this.mark_active_item = function(active_page) {
@@ -13,10 +14,12 @@ module.exports = function() {
 		this.mark_items($navList , 1);
 		if('links' in $breadcrumbs && 'reverse' in $breadcrumbs['links']) $breadcrumbs['links'].reverse();
 	}
-	
  }
  this.set_items = function(navList) {
 	$navList = navList;
+ }
+ this.get_items = function() {
+	return nav_items;
  }
  
 
@@ -24,12 +27,11 @@ module.exports = function() {
 	this.reset_items(navList);
 
 	var ret = false;
-	for(var i in navList)
+	for(var i = 0 ; i < navList.length; i++)
 	{
-	
-	 if(!navList.hasOwnProperty(i)) continue;
 	 var item = navList[i];
-	 
+
+
 	 item['icon'] = item['icon'] || false;
 	 //if there is no icon for this item, we set it as false
 	 //otherwise in recursive modes it will lookup the parent's scope and use that one's icon (Mustache only)
@@ -48,7 +50,7 @@ module.exports = function() {
 	 //maybe using something like handlebars with a little bit of logic is better here
 	 //or perhaps not using recursive partials, and a different partial for each submenu level
 
-	 if($active_page == item['link'])
+	 if($active_page != null && $active_page == item['link'])
 	 {
 		item['class'] = 'active';
 		if(item['submenu?']) item['class'] += ' no-active-child';//rare case, it means that this item has been directly selected, not a child of it, so it's not opened and take care of the caret using "no-active-child" class
@@ -76,6 +78,7 @@ module.exports = function() {
 		}
 	 }//it has submenu
 	 
+	 if(item['link'] != null) nav_items[item['link']] = true;
 	}//for
 	
 	return ret;

@@ -4,17 +4,17 @@
 		<meta charset="utf-8" />
 		<title>i118n</title>
 
-		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="../assets/css/font-awesome.css" />
 		
 		<!-- fonts -->
 		<link rel="stylesheet" href="../assets/css/ace-fonts.css" />
 		
 		<link rel="stylesheet" href="../assets/css/daterangepicker.css" />
 		
-		<link rel="stylesheet" href="../assets/css/ace.min.css" />
+		<link rel="stylesheet" href="../assets/css/ace.css" />
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
 		<![endif]-->
 	</head>
 
@@ -53,18 +53,18 @@
 		<!-- basic scripts -->
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
+		 window.jQuery || document.write("<script src='../assets/js/jquery.js'>"+"<"+"/script>");
 		</script>
 		<!-- <![endif]-->
 		<!--[if IE]>
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='../assets/js/jquery1x.min.js'>"+"<"+"/script>");
+		 window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
 		</script>
 		<![endif]-->
 		
-		<script src="../assets/js/bootstrap.min.js"></script>
-		<script src="../assets/js/date-time/moment.min.js"></script>
-		<script src="../assets/js/date-time/daterangepicker.min.js"></script>
+		<script src="../assets/js/bootstrap.js"></script>
+		<script src="../assets/js/date-time/moment.js"></script>
+		<script src="../assets/js/date-time/daterangepicker.js"></script>
 				
 		<!-- ace scripts -->
 		<script type="text/javascript">
@@ -72,7 +72,7 @@
 				//localization example for daterang picker
 				//change moment.js language to French
 				//example taken from: http://momentjs.com/docs/#/i18n/changing-language/
-				moment.lang('fr', {
+				moment.locale('fr', {
 					months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
 					monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
 					weekdays : "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
@@ -126,8 +126,8 @@
 					toLabel: 'Vers',
 					weekLabel: 'W',
 					customRangeLabel: 'Plage personnalisée',
-					daysOfWeek: moment()._lang._weekdaysMin,
-					monthNames: moment()._lang._monthsShort,
+					daysOfWeek: moment()._locale._weekdaysMin,
+					monthNames: moment()._locale._monthsShort,
 					firstDay: 0
 				  }
 				})
