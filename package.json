@@ -1,6 +1,6 @@
 {
-  "name": "ace-admin-template",
-  "version": "1.3.5",
+  "name": "ace",
+  "version": "1.3.9",
   "description": "Responsive admin template based on Bootstrap",
   "keywords": [
     "admin",
